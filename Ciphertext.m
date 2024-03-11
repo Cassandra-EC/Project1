@@ -1,4 +1,4 @@
-function cipher = Vigenere1(plain,key)
+%%TO GENERATE CIPHERTEXT
 
 % Make characters in key and plain lowercase
 plain = lower(plain);
@@ -19,11 +19,12 @@ end
 % TRIM repeated key to length of plain
 repeat_key = repeat_key(1:length(numbers_plain));
 
+% ENCRYPT using the key and plain #s
+cipher_numbers = numbers_key + numbers_plain;
 
+if cipher_numbers >= 26 % 0 - 25
+    cipher_numbers = cipher_numbers - 26 % Wrap around if exceeds bounds
 end
-%for ii = 1:length(plain)
 
-%if statement needed here?
-%modulo((plain_text(ii) + key(ii))26) = cipher(ii);
-% [24 6 14 27 15]
-% end
+% Converts (0-25) cipher numbers into lowercase ASCII
+cipher = char(cipher_numbers + 97);
