@@ -1,10 +1,10 @@
 function cipher = Vigenere1(plain,key)
 
-%VIGENERE1 takes plaintext and key to produce encrypted version of plain
-%matrix for plain text, separate cells
-plain_m = num2cell(plain_text, s);
-key_m = num2cell(key, s);
+% Make characters in key and plain lowercase
+plain = lower(plain);
+key = lower(key);
 
+% Convert lowercase to corresponding numbers
 
 length_plain = length(plain_m); %how to get length of string????
 length_key = length(key_m);
