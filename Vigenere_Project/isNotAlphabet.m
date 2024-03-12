@@ -1,5 +1,5 @@
 %%TO DETERMINE IF INPUTS ARE ALPHABETICAL 
-%No inputs with saces/punctuation; all must be one word, otherwise invalid
+%No inputs with spaces/punctuation; all must be one word, otherwise invalid
 %created 3/11/24 Cassandra
 
 function isFalse = isNotAlphabet(inputString)
