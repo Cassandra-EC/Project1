@@ -7,7 +7,7 @@ function isFalse = isNotAlphabet(inputString)
     inputString = lower(inputString);
 
     %match only alphabetical characters, from start to end
-    regexPattern = '^[a-z]+$';
+    regexPattern = '^[a-z]+$'; %CHANGE THIS TO FIT ASCII 
     
     %isFalse if any characters are not alphabetical
     isFalse = isempty(regexp(inputString, regexPattern, 'once')); %any non-matches returns ~true [i.e. false]

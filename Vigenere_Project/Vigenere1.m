@@ -2,13 +2,13 @@ function cipher = Vigenere1(plain,key)
 
 %VIGENERE1 takes plaintext and key to produce encrypted version of plain
 %matrix for plain text, separate cells
-plain_m = num2cell(plain_text, s);
-key_m = num2cell(key, s);
+%plain_m = num2cell(plain_text, s);
+%key_m = num2cell(key, s);
 
 
-length_plain = length(plain_m); %how to get length of string????
-length_key = length(key_m);
-cipher_m = zeros(length_plain);
+%length_plain = length(plain_m); %how to get length of string????
+%length_key = length(key_m);
+%%icpher_m = zeros(length_plain);
 
 
 %%FOR IF YOUR INPUTS ARE BAD
