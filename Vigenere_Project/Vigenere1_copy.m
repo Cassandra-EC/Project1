@@ -1,4 +1,4 @@
-function cipher = Vigenere1(plain,key)
+%function cipher = Vigenere1(plain,key)
 
 
 
@@ -8,9 +8,9 @@ function cipher = Vigenere1(plain,key)
 %num2cell(plain): split into separate 1x1 cell arrays
 %plain(2): already calls 2nd letter of plain
 
-length_p = length(plain); %how to get length of string????
-length_k = length(key);
-cipher = zeros(length_p);
+%length_p = length(plain); %how to get length of string????
+%length_k = length(key);
+%cipher = zeros(length_p);
 
 
 %%%%%FOR IF YOUR INPUTS ARE INVALID

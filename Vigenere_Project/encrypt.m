@@ -14,13 +14,14 @@ cipher = char(zeros(1, length_p));
 
 %if key is longer than plain, irrelevant; move on
 if length_k > length_p
-    return; %IF WE TRIM DO HERE
+    disp(strcat('Did you want', {' '}, plain, ' to be your plaintext?'));
+    key_new = key;
+    %return; %IF WE TRIM DO HERE
     %%%%instead of trim: error message, confirm user wanted that order
 
 % if key = length of plain, move on
 elseif length_k == length_p
-    return;
-    %%%FIX THIS GUY
+    key_new = key;
 
 % if length_p > length_k, repeat key until same length as plain
 else 
