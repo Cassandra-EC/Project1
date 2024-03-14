@@ -1,5 +1,5 @@
 function encrypted_img = encrypt_my_img(og_img, key)
-%%%WE'LL DO THIS LATER
+%%% ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
 
 
 end
