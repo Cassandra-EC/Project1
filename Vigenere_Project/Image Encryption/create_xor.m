@@ -1,0 +1,1 @@
+function xor_img = create_xor(og_img, key_img)
