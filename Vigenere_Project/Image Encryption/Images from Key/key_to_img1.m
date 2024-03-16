@@ -1,3 +1,4 @@
+% created 3/14/24 CC. Last edited 3/15/24 CC
 function key_new1 = key_to_img1(key, og_img)
 %%%CREATE KEY_NEW1, AN IMAGE MADE FROM 'KEY' INPUT, THAT IS THE SIZE OF OG_IMG
     % SUMMARY: characters of key (in an abbreviated ASCII code) are assigned to numeric values.

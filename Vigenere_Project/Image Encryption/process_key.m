@@ -65,15 +65,7 @@ shared_key = round(shared_key/95 * 255);
 % convert to uint8 (fit any outside values within range)
 shared_key = uint8(shared_key);
 
-
 %=== RESHAPE SHARED_KEY TO FIT OG_IMG
 shared_key = reshape(shared_key, size(og_img));
-
-
-%=== DISPLAY SHARED_KEY AS AN IMAGE [temporary]
-colormap(gray);     %%% CHANGE IF WE DO 3 CHANNELS
-
-% Show image; will scale to fit user's window & use values 0-255
-imshow(shared_key, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 
 end

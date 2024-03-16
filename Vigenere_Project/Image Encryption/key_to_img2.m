@@ -1,4 +1,6 @@
-function draftkey_new2 = key_to_img2(key, og_img)
+% created 3/15/24 CC. Last edited 3/15/24 CC
+
+function key_new2 = key_to_img2(key, og_img)
     % SUMMARY: characters of key are used to form an array of same size as
     % og_img (like in key_to_img1. This array will be used to encrypt
     % (doubly!) xor_img and give us our final encrypted output.
@@ -9,14 +11,27 @@ function draftkey_new2 = key_to_img2(key, og_img)
     % image
 
     %%% INPUTS:
-        % key = original text input by user (vector)
+        % key = text input by user (vector)
         % og_img = original img input by user (array)
+
     %%% OUTPUTS: image created from adapted key
-        % this image 
+        % key_new2: values of key (doubled, scaled) repeat in a spiral
+
+%=== REDECLARE KEY SO EACH CHAR IS DOUBLED
+% save original copy
+key_copy = key;
+
+% each char of key is doubled (repeated once)
+key = repelem(key, 2);
 
 %=== REPEAT EACH CHARACTER OF NUMERIC_K (numeric version of key)
+% call shared_key (but with new, doubled version of key)
+key_new2 = process_key(key, og_img);
+
+imshow(key_new2, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 
 
-
+%=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
+key = key_copy;
 
 end
