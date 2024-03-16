@@ -55,32 +55,32 @@ while num <= rows*cols
         end
     end
 
-
-
-        % Move right if not at the last column or next position is already filled
-        if c < cols && s(r, c + 1) == 0
-            c = c + 1; % Move right
-        elseif r < rows && s(r + 1, c) == 0 % Move down if not at the last row or next position is already filled
-            r = r + 1; % Move down
-        elseif c > 1 && s(r, c - 1) == 0 % Move left if not at the first column or next position is already filled
-            c = c - 1; % Move left
-        elseif r > 1 && s(r - 1, c) == 0 % Move up if not at the first row or next position is already filled
-            r = r - 1; % Move up
-        else
-            break; % Stop if nowhere to move
-        end
-        c = c+1;        %move right
-    end
-
-
-s(r, c) = 1;        % center position set to 1
-
-
-%=== IF MATRIX IS 1x1, RETURN
-if rows*cols == 1
-    spiral_indices = [r, c];
-    return;
-end
+% 
+% 
+%         % Move right if not at the last column or next position is already filled
+%         if c < cols && s(r, c + 1) == 0
+%             c = c + 1; % Move right
+%         elseif r < rows && s(r + 1, c) == 0 % Move down if not at the last row or next position is already filled
+%             r = r + 1; % Move down
+%         elseif c > 1 && s(r, c - 1) == 0 % Move left if not at the first column or next position is already filled
+%             c = c - 1; % Move left
+%         elseif r > 1 && s(r - 1, c) == 0 % Move up if not at the first row or next position is already filled
+%             r = r - 1; % Move up
+%         else
+%             break; % Stop if nowhere to move
+%         end
+%         c = c+1;        %move right
+%     end
+% 
+% 
+% s(r, c) = 1;        % center position set to 1
+% 
+% 
+% %=== IF MATRIX IS 1x1, RETURN
+% if rows*cols == 1
+%     spiral_indices = [r, c];
+%     return;
+% end
 
 
 %===== BEGIN PATTERN =====%

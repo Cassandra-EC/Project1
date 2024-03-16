@@ -1,5 +1,18 @@
 function encrypted_img = encrypt_my_img(og_img, key)
-%%% ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
+
+
+%=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
+
+
+
+
+
+%=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
+% xor_img + key_new2 = encrypted_img
+create_xor(og_img, key);
+key_to_img2(og_img, key);
+
+encrypted_img = create_xor + key_to_img2;
 
 
 %=== ACQUIRE SIZE OF KEY & OG_IMG

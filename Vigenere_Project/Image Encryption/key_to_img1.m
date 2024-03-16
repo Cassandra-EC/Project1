@@ -1,6 +1,6 @@
 % created 3/14/24 CC. Last edited 3/15/24 CC
 
-function key_new1 = key_to_img1(key, og_img)
+function key_new1 = key_to_img1(og_img, key)
 
 %%%CREATE KEY_NEW1, AN IMAGE MADE FROM 'KEY' INPUT, THAT IS THE SIZE OF OG_IMG
     % SUMMARY: characters of key (in an abbreviated ASCII code) are assigned to numeric values.
@@ -16,13 +16,14 @@ function key_new1 = key_to_img1(key, og_img)
         % columns)
 
 %%% KEY_NEW1 IS EQUIVALENT TO PROCESS_KEY
-key_new1 = process_key(key, og_img);
+shared_key = process_key(og_img, key);
+key_new1 = shared_key;
 
 %=== DISPLAY SHARED_KEY AS AN IMAGE [temporary]
 colormap(gray);     %%% CHANGE IF WE DO 3 CHANNELS
 
 % Show image; will scale to fit user's window & use values 0-255
-imshow(shared_key, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 
 end
 

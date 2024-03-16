@@ -1,7 +1,7 @@
 % created 3/15/24 CC. Last edited 3/15/24 CC 
 % using underlying code from SN]
 
-function key_new2 = key_to_img2(key, og_img)
+function key_new2 = key_to_img2(og_img, key)
     % SUMMARY: characters of key are used to form an array of same size as
     % og_img (like in key_to_img1. This array will be used to encrypt
     % (doubly!) xor_img and give us our final encrypted output.

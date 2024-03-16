@@ -1,6 +1,6 @@
 % created 3/15/24 CC. Last edited 3/15/24 CC
 
-function shared_key = process_key(key, og_img)
+function shared_key = process_key(og_img, key)
 %%%CREATE SHARED FUNCTIONALITY THAT CAN BE USED BY KEY_TO_IMG 1 & 2
     
     % SUMMARY: characters of key (in an abbreviated ASCII code) are assigned to numeric values.
@@ -17,6 +17,7 @@ function shared_key = process_key(key, og_img)
 %=== ACQUIRE CURRENT SIZE OF KEY AND OG_IMG
 length_k = length(key);
 size_og = numel(og_img);
+
 
 %=== CREATE NUMERIC KEY
 % numeric version of key, accounting for desired ASCII start (32 = space)
@@ -64,6 +65,7 @@ shared_key = round(shared_key/95 * 255);
 
 % convert to uint8 (fit any outside values within range)
 shared_key = uint8(shared_key);
+
 
 %=== RESHAPE SHARED_KEY TO FIT OG_IMG
 shared_key = reshape(shared_key, size(og_img));

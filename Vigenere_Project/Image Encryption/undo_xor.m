@@ -1,1 +1,1 @@
-function og_img = undo_xor(xor_img, key)
+function og_img = undo_xor(og_img, key, xor_img)
