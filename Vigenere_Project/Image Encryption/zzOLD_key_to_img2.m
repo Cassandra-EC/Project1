@@ -1,4 +1,4 @@
-    %%% OLD!!! I've created a new function called key_to_img2 (this has
+    %%% OLD!!! Created a new function called key_to_img2 (this has
     %%% been renamed to zzOLD_key_to_img2 by CC 3/15/24
 
 function complex_key_img = key_to_img2(key, og_img)
