@@ -53,7 +53,7 @@ key_new1 = mod(key_new1, 256);
 %=== DISPLAY KEY_NEW1 AS AN IMAGE? ??????????????
 colormap(gray);     %%% CHANGE IF WE DO 3 CHANNELS
 
-% Show image; will scale to fit user's window & use values 0-255
+% Show image; will scale to fit user's window & use values [0, 255]
 imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 
 end
