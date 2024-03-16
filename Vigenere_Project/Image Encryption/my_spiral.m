@@ -6,18 +6,79 @@ function spiral_indices = my_spiral(rows, cols)
 
 
 %=== INITIALIZE VARIABLES
-% matrix to store spiral values
+% matrix to store spiral values. array size = rows*cols
 s = zeros(rows, cols);
 
+
 % starting position:
-A = ceil(rows/2);   % middle row
-B = ceil(cols/2);   % middle column
-s(A, B) = 1;        % center position set to 1
+r = 1;      % initialize row index
+c = 1;     % initialize column index
+
+%=== BEGIN FILLING
+num = 1;
+while num <= rows*cols
+    % move right until an 1) edge or 2) filled position
+    while c <= cols && s(r, c) == 0
+        % fill current position & increment index
+        s(r,c) = num;   
+        num = num+1;   
+
+        % decide next movt
+        if c < cols && s(r,c+1) ==0
+            % move right! All's well
+            c = c+1;
+        elseif s(r+1,c) ==0
+            % move down! Time to switch direction
+            r = r+1;
+        else
+            %nowhere else to go
+            break; 
+        end
+    end
+
+
+    while r <= cols && s(r, c) == 0
+        % fill current position & increment index
+        s(r,c) = num;   
+        num = num+1;   
+
+        % decide next movt
+        if c < cols && s(r,c+1) ==0
+            % move right! All's well
+            c = c+1;
+        elseif s(r+1,c) ==0
+            % move down! Time to switch direction
+            r = r+1;
+        else
+            %nowhere else to go
+            break; 
+        end
+    end
+
+
+
+        % Move right if not at the last column or next position is already filled
+        if c < cols && s(r, c + 1) == 0
+            c = c + 1; % Move right
+        elseif r < rows && s(r + 1, c) == 0 % Move down if not at the last row or next position is already filled
+            r = r + 1; % Move down
+        elseif c > 1 && s(r, c - 1) == 0 % Move left if not at the first column or next position is already filled
+            c = c - 1; % Move left
+        elseif r > 1 && s(r - 1, c) == 0 % Move up if not at the first row or next position is already filled
+            r = r - 1; % Move up
+        else
+            break; % Stop if nowhere to move
+        end
+        c = c+1;        %move right
+    end
+
+
+s(r, c) = 1;        % center position set to 1
 
 
 %=== IF MATRIX IS 1x1, RETURN
 if rows*cols == 1
-    spiral_indices = [A, B];
+    spiral_indices = [r, c];
     return;
 end
 
@@ -31,55 +92,132 @@ end
 % Repeat process
 
 %=== INITIALIZE
-k = 1;  % inidialize indices
-d = 1;  % initialize direction (increasing vs decreasing)
+k = 1;      % indices
+d = 1;      % direction (increasing vs decreasing)
 
+for p = max(rows, cols)-1:-1:1
+    step = p;
 
-for p = 1:min(rows,cols)
-    q = 1:p;        % generate vector from 1 to p
-    B = B + d*q;    % update column index
-    k = k + q;      % update index
-    s(A,B) = k;     % store new index in postion (A,B) of s
-
-    % If spiral is complete, exit function
-    if p == rows && p = cols
-        spiral_indices = [A,B]; %store all indices
-        return;
+    % Right on row (+d) or Left on row (-d)
+    for ii = 1:step
+        if r >= 1 && r <= rows && c >= 1 && c <= cols
+            s(r, c) = k;
+            k = k + 1;
+        end
+        c = c + d; % move right (+d) or left (-d)
     end
+
+    % Down on column (+d) or Up on column (-d)
+    for ii = 1:step
+        if r >= 1 && r <= rows && c >= 1 && c <= cols
+            s(r, c) = k;
+            k = k + 1;
+        end
+        r = r + d; % move down (+d) or up (-d)
+    end
+
+   
+    
+    % Change direction
+    d = -d;
+
+    
+
+end
+    
+% return the spiral pattern
+spiral_indices = s;
+
 end
 
 
 
+%{
+OLD DRAFTS
+% Outer layers of spiral
+
+% Generate spiral
+for p = 1:max(rows,cols) - 1
+     step = p;
+
+    % Right on row (+d) or Left on row (-d)
+    for ii = 1:step
+        s(r,c) = k;
+        k = k+1;
+        c = c+d;    % move right (+d) or left (-d)
+    end
 
 
- 
+    % Down on column (+d) or Up on column (-d)
+    for ii = 1:step
+        s(r,c) = k;
+        k = k+1;
+        r = r+d;    % move down (+d) or up (-d)
+    end
+    
+
+    % Change direction
+    d = -d;
+
+    end
 
 
+% Return the spiral pattern
+spiral_indices = s;
 
-% Start in the center.
-s = zeros(n,n);
-i = ceil(n/2);
-j = ceil(n/2);
-s(i,j) = 1;
-if n == 1, return, end
-
-% Wind outward from the center.  Use fixed i and increasing j,
-% then fixed j and increasing i, then fixed i and decreasing j,
-% then fixed j and decreasing i.  Then repeat.
-k = 1;  % Numbering.
-d = 1;  % Increasing or decreasing.
-for p = 1:n
-   q = 1:min(p,n-1);  % Note that q is a vector.
-   j = j+d*q;
-   k = k+q;
-   s(i,j) = k;
-   if (p == n), return, end
-   j = j(p);
-   k = k(p);
-   i = i+d*q';
-   k = k+q';
-   s(i,j) = k;
-   i = i(p);
-   k = k(p);
-   d = -d;
 end
+
+%{
+while k <= total_steps
+        % Right on row
+        step = step+1;
+        c = c+d;    % Move right
+        if r >= 1 && r <= rows && c >= 1 && c <= cols
+            s(r,c) = k;     % Update matrix
+            k = k + 1;      % Increment index
+        end
+
+
+        % Down col
+        for ii = 1:step
+            r = r+d;    % Move down
+            if r >= 1 && r <= rows && c >= 1 && c <= cols
+                s(r,c) = k;     % Update matrix
+                k = k + 1;      % Increment index
+            end
+        end
+
+
+        % Left on row
+        for ii = 1:step
+            c = c-d;    % Move left
+            if r >= 1 && r <= rows && c >= 1 && c <= cols
+                s(r,c) = k;     % Update matrix
+                k = k+1;        % Increment index
+            end
+        end
+
+
+        % Up col
+        for ii = 1:step
+            r = r-d;        % Move up
+            if r >= 1 && r <= rows && c >= 1 && c <= cols
+                s(r,c) = k;     % Update matrix
+                k = k+1;        % Increment index
+            end
+        end
+    
+   
+    %=== SWITCH DIRECTION for next iteration
+    d = -d;
+
+end
+
+%=== STORE SPIRAL INDICES
+spiral_indices = s;
+
+end
+%}
+%}
+
+
