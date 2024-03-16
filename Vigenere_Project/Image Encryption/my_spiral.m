@@ -1,8 +1,60 @@
-function s = spiral(n)
-%SPIRAL SPIRAL(n) is an n-by-n matrix with elements ranging
-%   from 1 to n^2 in a rectangular spiral pattern.
+% created 3/15/24 CC (referencing Matlab's 'spiral' function)
+% Last edited 3/15/24 CC [still working]
 
-%   Copyright 1984-2014 The MathWorks, Inc. 
+function spiral_indices = my_spiral(rows, cols)
+% MY_SPIRAL generates spiral_indices for a matrix of size rows x cols
+
+
+%=== INITIALIZE VARIABLES
+% matrix to store spiral values
+s = zeros(rows, cols);
+
+% starting position:
+A = ceil(rows/2);   % middle row
+B = ceil(cols/2);   % middle column
+s(A, B) = 1;        % center position set to 1
+
+
+%=== IF MATRIX IS 1x1, RETURN
+if rows*cols == 1
+    spiral_indices = [A, B];
+    return;
+end
+
+
+%===== BEGIN PATTERN =====%
+%%% Wind out from center point
+% 1) down col [fixed A, increasing B] 
+% 2) right on row [fixed B, increasing A]
+% 3) left on row [fixed A, decreasing B]
+% 4) up col [decreasing A, fixed B]
+% Repeat process
+
+%=== INITIALIZE
+k = 1;  % inidialize indices
+d = 1;  % initialize direction (increasing vs decreasing)
+
+
+for p = 1:min(rows,cols)
+    q = 1:p;        % generate vector from 1 to p
+    B = B + d*q;    % update column index
+    k = k + q;      % update index
+    s(A,B) = k;     % store new index in postion (A,B) of s
+
+    % If spiral is complete, exit function
+    if p == rows && p = cols
+        spiral_indices = [A,B]; %store all indices
+        return;
+    end
+end
+
+
+
+
+
+ 
+
+
 
 % Start in the center.
 s = zeros(n,n);
