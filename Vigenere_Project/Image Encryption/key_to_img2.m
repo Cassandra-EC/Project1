@@ -1,5 +1,7 @@
-% created 3/15/24 CC. Last edited 3/15/24 CC 
+% created 3/15/24 CC. Edited 3/15/24 CC 
 % using underlying code from SP]
+% Edited 03/17/24 SP-- 
+
 
 function key_new2 = key_to_img2(og_img, key)
     % SUMMARY: characters of key are used to form an array of same size as
@@ -28,18 +30,17 @@ key = repelem(key, 2);
 
 %=== REPEAT EACH CHARACTER OF NUMERIC_K (numeric version of key)
 % call shared_key (but with new, doubled version of key)
-key_new2 = process_key(key, og_img);
+shared_key = process_key(og_img, key);
 
 
 %=== CREATE SPIRAL PATTERN OF KEY_NEW2
-[rows, cols] = size(key_new2);
+[rows, cols] = size(shared_key);
 
 % reshape key_new2 into a column vector
-key_col = key_new2(:);
+key_col = shared_key(:);
 
 % rearrange key_new2 elements into a spiral
-key_new2 = reshape(key_col(spiral(rows, cols)), rows, cols);
-
+key_new2 = my_spiral(rows, cols, key_col);
 
 
 %=== SHOW KEY_NEW2
