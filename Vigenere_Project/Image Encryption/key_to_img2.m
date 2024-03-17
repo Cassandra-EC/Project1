@@ -34,13 +34,12 @@ shared_key = process_key(og_img, key);
 
 
 %=== CREATE SPIRAL PATTERN OF KEY_NEW2
+% get values for rows & columns [parameters for my_spiral output]
 [rows, cols] = size(shared_key);
 
-% reshape key_new2 into a column vector
-key_col = shared_key(:);
 
 % rearrange key_new2 elements into a spiral
-key_new2 = my_spiral(rows, cols, key_col);
+key_new2 = my_spiral(rows, cols, shared_key);
 
 
 %=== SHOW KEY_NEW2

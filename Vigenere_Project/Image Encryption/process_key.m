@@ -68,7 +68,6 @@ shared_key = round(double(shared_key) / max_value * 255);
 % convert to uint8 (fit any outside values within range)
 shared_key = uint8(shared_key);
 
-
 %=== RESHAPE SHARED_KEY TO FIT OG_IMG
 shared_key = reshape(shared_key, size(og_img));
 
