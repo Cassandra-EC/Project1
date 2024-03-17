@@ -14,6 +14,8 @@ function shared_key = process_key(og_img, key)
     
     %%% OUTPUTS: array created from key, matching size of og_img
 
+
+
 %=== ACQUIRE CURRENT SIZE OF KEY AND OG_IMG
 length_k = length(key);
 size_og = numel(og_img);
@@ -70,5 +72,16 @@ shared_key = uint8(shared_key);
 
 %=== RESHAPE SHARED_KEY TO FIT OG_IMG
 shared_key = reshape(shared_key, size(og_img));
+
+
+%=== MATCH NUM CHANNELS IN KEY TO OG_IMG
+% this enables RGB input
+num_channels = size(og_img, 3);
+
+if num_channels >1
+    shared_key = repmat(shared_key, [1,1, num_channels]);
+    
+end
+
 
 end
