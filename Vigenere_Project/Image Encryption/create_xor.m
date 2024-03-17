@@ -16,11 +16,6 @@ xor_img = double(og_img) - double(key_new1); % IT WAS ADDITION SOBBING LOL
 xor_img = mod(xor_img, 256);
 xor_img = uint8(xor_img);
 
-
-%=== DISPLAY XOR_IMG (for now)
-% scale image to fit the window (whether too big/small)
-imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-
 end
 
 

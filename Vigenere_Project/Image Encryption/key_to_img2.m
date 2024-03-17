@@ -42,14 +42,8 @@ shared_key = process_key(og_img, key);
 key_new2 = my_spiral(rows, cols, shared_key);
 
 
-%=== SHOW KEY_NEW2
-imshow(key_new2, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-
-
 %=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
 key = key_copy;
-
-
 
 
 end
