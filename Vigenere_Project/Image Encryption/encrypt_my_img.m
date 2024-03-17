@@ -11,23 +11,28 @@ function encrypted_img = encrypt_my_img(og_img, key)
 % xor_img + key_new2 = encrypted_img 
 
 %%% NEED TO CALL KEY TO IMG 1
-key_new1 = key_to_img1(og_img, key);
+key_new1 = uint8(key_to_img1(og_img, key));
 
 %%%NEED TO CALL CREATE XOR
-xor_img = create_xor(og_img, key_new1);
+xor_img = uint8(create_xor(og_img, key_new1));
 
 % Make key matrix (Call key_to_img2)
-key_new2 = key_to_img2(og_img, key);
+key_new2 = uint8(key_to_img2(og_img, key));
 
-% Right image and right key? Check
+
+% [debug] Confirm that og_img and key_new2 are the same size
 if ~isequal(size(og_img), size(key_new2))
     disp('size issue'); %%REMOVE LATER, for debugging reasons
+    size(og_img)
+    size(key_new2)
 end
 
 
 % Create encrypted image
 encrypted_img = double(xor_img) + double(key_new2);
 encrypted_img = mod(encrypted_img, 256); %wraparound if eneded
+encrypted_img = uint8(encrypted_img);
+
 
 % Display original and encrypted images
 figure;
@@ -43,7 +48,7 @@ axis off;
 
 subplot(1, 4, 3);
 imshow(key_new2, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('Spiral Cipher');
+title('Key 2 (spiral)');
 axis off;
 
 subplot(1, 4, 4);

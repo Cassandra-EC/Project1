@@ -18,6 +18,7 @@ function spiral = my_spiral(rows, cols, input)
 % matrix to store spiral values. array size = rows*cols
 spiral = zeros(rows, cols);
 
+
 % reshape input into a column vector
 column_input = input(:);
 
@@ -76,11 +77,12 @@ while num <= numel(column_input)
         left = left + 1;
 end
 
-figure;
-imagesc(spiral);
-colormap(gray);
-title('MY SPIRAL!!!');
-axis off
+
+% figure;
+% imagesc(spiral);
+% colormap(gray);
+% title('MY SPIRAL!!!');
+% axis off
 
 end
 

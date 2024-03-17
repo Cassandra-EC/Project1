@@ -33,18 +33,37 @@ key = repelem(key, 2);
 shared_key = process_key(og_img, key);
 
 
-%=== CREATE SPIRAL PATTERN OF KEY_NEW2
-% get values for rows & columns [parameters for my_spiral output]
-[rows, cols] = size(shared_key);
 
+% how many channels are in the input?
+num_channels = size(shared_key, 3);
+shared_key_copy = shared_key;
 
-% rearrange key_new2 elements into a spiral
-key_new2 = my_spiral(rows, cols, shared_key);
+if num_channels >1
+    % use only the first channel of the input. Will copy this to the others
+    shared_key = shared_key(:,:,1);
+    
+    %=== CREATE SPIRAL PATTERN OF KEY_NEW2
+    % get values for rows & columns [parameters for my_spiral output]
+    [rows, cols] = size(shared_key);
+    key_new2 = my_spiral(rows, cols, shared_key);
+
+    shared_key = shared_key_copy;
+
+    % copy spiral over original # of channels
+    key_new2 = repmat(key_new2, [1, 1, num_channels]);
+
+else
+    %=== CREATE SPIRAL PATTERN OF KEY_NEW2
+    % get values for rows & columns [parameters for my_spiral output]
+    [rows, cols] = size(shared_key);
+
+    % rearrange key_new2 elements into a spiral
+    key_new2 = my_spiral(rows, cols, shared_key);
+end
 
 
 %=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
 key = key_copy;
-
 
 end
 
