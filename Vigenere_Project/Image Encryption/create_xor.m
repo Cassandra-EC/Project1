@@ -13,8 +13,8 @@ key_new1 = key_to_img1(key, og_img);
 key_new1 = uint8(key_new1); 
 
 xor_img = double(og_img) - double(key_new1); % IT WAS ADDITION SOBBING LOL
-xor_img = uint8(xor_img);
 xor_img = mod(xor_img, 256);
+xor_img = uint8(xor_img);
 
 
 %=== DISPLAY XOR_IMG (for now)

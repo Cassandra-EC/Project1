@@ -2,13 +2,13 @@
 % Edited 3/15/24 CC [still working]
 % Last edited 03/17/24 SP [WORKS FOR key_col input, done for grayscale]
 
-function spiral_indices = my_spiral(rows, cols, key_col)
+function spiral = my_spiral(rows, cols, key_col)
 % MY_SPIRAL generates spiral_indices for a matrix of size rows x cols
 
 
 %=== INITIALIZE VARIABLES
 % matrix to store spiral values. array size = rows*cols
-spiral_indices = zeros(rows, cols);
+spiral = zeros(rows, cols);
 
 % starting position:
 r = 1;      % initialize row index
@@ -24,8 +24,8 @@ right = cols;
 %=== BEGIN FILLING spiral indices
 while num <= numel(key_col)
         % Move right until either edge or filled index
-        while c <= right && spiral_indices(r, c) == 0
-            spiral_indices(r, c) = key_col(num);  
+        while c <= right && spiral(r, c) == 0
+            spiral(r, c) = key_col(num);  
             num = num + 1;
             c = c + 1; % Move right
         end
@@ -34,9 +34,9 @@ while num <= numel(key_col)
         top = top + 1;
 
         % Move down (col)
-        while r <= bottom && spiral_indices(r, c) == 0
+        while r <= bottom && spiral(r, c) == 0
             % Fill position, increment num
-            spiral_indices(r, c) = key_col(num);
+            spiral(r, c) = key_col(num);
             num = num + 1;
             r = r + 1; % Move down
         end
@@ -45,8 +45,8 @@ while num <= numel(key_col)
         right = right - 1;
 
         % move left
-        while c >= left && spiral_indices(r, c) == 0
-            spiral_indices(r, c) = key_col(num);
+        while c >= left && spiral(r, c) == 0
+            spiral(r, c) = key_col(num);
             num = num + 1;
             c = c - 1; % move left
         end
@@ -55,8 +55,8 @@ while num <= numel(key_col)
         bottom = bottom - 1;
 
         % move up
-        while r >= top && spiral_indices(r, c) == 0
-            spiral_indices(r, c) = key_col(num);
+        while r >= top && spiral(r, c) == 0
+            spiral(r, c) = key_col(num);
             num = num + 1;
             r = r - 1; % move up
         end
@@ -66,9 +66,10 @@ while num <= numel(key_col)
 end
 
 figure;
-imagesc(spiral_indices);
+imagesc(spiral);
 colormap(gray);
 title('MY SPIRAL!!!');
+axis off
 
 end
 

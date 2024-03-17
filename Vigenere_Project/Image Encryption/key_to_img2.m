@@ -1,6 +1,6 @@
 % created 3/15/24 CC. Edited 3/15/24 CC 
 % using underlying code from SP]
-% Edited 03/17/24 SP-- 
+% Edited 03/17/24 SP
 
 
 function key_new2 = key_to_img2(og_img, key)
