@@ -32,22 +32,22 @@ encrypted_img = mod(encrypted_img, 256); %wraparound if eneded
 % Display original and encrypted images
 figure;
 subplot(1, 4, 1);
-imshow(og_img);
+imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Original Image');
 axis off;
 
 subplot(1, 4, 2);
-imshow(xor_img);
+imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('XOR Image');
 axis off;
 
 subplot(1, 4, 3);
-imshow(key_new2);
+imshow(key_new2, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Spiral Cipher');
 axis off;
 
 subplot(1, 4, 4);
-imshow(encrypted_img);
+imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Encrypted Image');
 axis off;
 
