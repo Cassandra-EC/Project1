@@ -7,8 +7,11 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
 % xor_img + key_new2 = encrypted_img 
 
+%%% NEED TO CALL KEY TO IMG 1
+key_new1 = key_to_img1(og_img, key);
+
 %%%NEED TO CALL CREATE XOR
-xor_img = create_xor(og_img, key);
+xor_img = create_xor(og_img, key_new1);
 
 % Make key matrix (Call key_to_img2)
 key_new2 = key_to_img2(og_img, key);

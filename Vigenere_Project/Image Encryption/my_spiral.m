@@ -1,8 +1,8 @@
 % created 3/15/24 CC (referencing Matlab's 'spiral' function)
-% Last edited 3/15/24 CC [still working]
-% 
+% Edited 3/15/24 CC [still working]
+% Last edited 03/16/24 SP [Code works]
 
-function spiral_indices = my_spiral(rows, cols)
+function spiral_indices = my_spiral(rows, cols, key_col)
 % MY_SPIRAL generates spiral_indices for a matrix of size rows x cols
 
 
@@ -15,43 +15,50 @@ r = 1;      % initialize row index
 c = 1;     % initialize column index
 num = 1;
 
-%=== BEGIN FILLING
-while num <= rows*cols
+%=== BEGIN FILLING spiral indices
+while num <= numel(key_col)
     % move right until an 1) edge or 2) filled position
     while c <= cols && spiral_indices(r, c) == 0
         % fill current position & increment index
-        spiral_indices(r,c) = num;   
-        num = num+1;   
-
-        % decide next movt
-        if c < cols && spiral_indices(r,c+1) ==0
-            % move right! All's well
-            c = c+1;
-        elseif r < rows && spiral_indives(r+1, c) ==0
-            % move down! Time to switch direction
-            r = r+1;
-        else
-            %nowhere else to go
-            break; 
-        end
+        spiral_indices(r, c) = key_col(num);  
+        num = num + 1;
+        c = c + 1; % Move right
     end
+    c = c - 1; % Need to adjust column index to keep from issues
 
-
+    % Move down on column
+    r = r + 1; % Move down
     while r <= rows && spiral_indices(r, c) == 0
         % fill current position & increment index
-        spiral_indices(r,c) = num;   
+        spiral_indices(r,c) = key_col(num);   
         num = num+1;   
-
-        % decide next movt
-        if r < rows && spiral_indices(r+1,c) == 0
-            r = r+1; % Move down
-        elseif c > 1 && spiral_indices(r, c-1) == 0
-            c = c-1; % Move left
-        else
-            %nowhere else to go
-            break; 
-        end
+        r = r + 1; % Move down
     end
+    r = r - 1; % Adjust row index to avoid issues
+   
+    % Move left on rows
+    c = c - 1; % Move left
+    while c >= 1 && spiral_indices(r, c) == 0
+        spiral_indices(r, c) = key_col(num);
+        num = num + 1;
+        c = c - 1; % Move left
+    end
+    c = c + 1; % Adjust column index
+
+    % Moving up on columns
+    r = r - 1; % Move up
+    while r >= 1 && spiral_indices(r, c) == 0
+        spiral_indices(r, c) = key_col(num);
+        num = num + 1;
+        r = r - 1; % Move up
+    end
+    r = r + 1;
+    c = c + 1;
+end
+
+end 
+
+
 
 % 
 % 
@@ -90,43 +97,43 @@ while num <= rows*cols
 % Repeat process
 
 %=== INITIALIZE
-k = 1;      % indices
-d = 1;      % direction (increasing vs decreasing)
+%k = 1;      % indices
+%d = 1;      % direction (increasing vs decreasing)
 
-for p = max(rows, cols)-1:-1:1
-    step = p;
+%for p = max(rows, cols)-1:-1:1
+   % step = p;
 
     % Right on row (+d) or Left on row (-d)
-    for ii = 1:step
-        if r >= 1 && r <= rows && c >= 1 && c <= cols
-            s(r, c) = k;
-            k = k + 1;
-        end
-        c = c + d; % move right (+d) or left (-d)
-    end
+    %for ii = 1:step
+        %if r >= 1 && r <= rows && c >= 1 && c <= cols
+          %  s(r, c) = k;
+            %k = k + 1;
+       % end
+       % c = c + d; % move right (+d) or left (-d)
+   % end
 
     % Down on column (+d) or Up on column (-d)
-    for ii = 1:step
-        if r >= 1 && r <= rows && c >= 1 && c <= cols
-            s(r, c) = k;
-            k = k + 1;
-        end
-        r = r + d; % move down (+d) or up (-d)
-    end
+    %for ii = 1:step
+      %  if r >= 1 && r <= rows && c >= 1 && c <= cols
+           % s(r, c) = k;
+            %k = k + 1;
+       % end
+       % r = r + d; % move down (+d) or up (-d)
+   % end
 
    
     
     % Change direction
-    d = -d;
-
+   % d = -d;
+%
     
 
-end
+%end
     
 % return the spiral pattern
-spiral_indices = s;
+%spiral_indices = s;
 
-end
+%end
 
 
 
