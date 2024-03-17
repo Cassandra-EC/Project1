@@ -28,7 +28,7 @@ key_num = double(key) - 32;
 %if key is larger than image, confirm if user wants these inputs
 % IF KEY = SIZE OF OG_IMG, RESHAPE AND MOVE ON
 if length_k == size_og
-    shared_key = key_num;
+   shared_key = key_num;
 
 
 % IF KEY < SIZE OF OG_IMG, REPEAT KEY TO MATCH SIZE
@@ -53,7 +53,7 @@ else
         shared_key = key_num(1:size_og);
 
     else
-        % return without modifying key
+        % return wsithout modifying key
         disp('Returning original key. Please submit new inputs.');
         return;
     end
@@ -61,7 +61,9 @@ end
 
 
 %=== SCALE KEY TO SPAN 0-255 (only integer values)
-shared_key = round(shared_key/95 * 255);
+max_value = max(shared_key(:));
+
+shared_key = round(double(shared_key) / max_value * 255);
 
 % convert to uint8 (fit any outside values within range)
 shared_key = uint8(shared_key);

@@ -16,6 +16,7 @@ function key_new1 = key_to_img1(og_img, key)
         % columns)
 
 %%% KEY_NEW1 IS EQUIVALENT TO PROCESS_KEY
+
 shared_key = process_key(og_img, key);
 key_new1 = shared_key;
 

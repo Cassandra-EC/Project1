@@ -17,46 +17,62 @@ num = 1;
 
 %=== BEGIN FILLING spiral indices
 while num <= numel(key_col)
-    % move right until an 1) edge or 2) filled position
-    while c <= cols && spiral_indices(r, c) == 0
-        % fill current position & increment index
-        spiral_indices(r, c) = key_col(num);  
-        num = num + 1;
-        c = c + 1; % Move right
+        % Move right until either edge or filled index
+        while c <= cols && spiral_indices(r, c) == 0
+            spiral_indices(r, c) = key_col(num);  
+            num = num + 1;
+            c = c + 1; % Move right
+        end
+        c = c - 1;
+
+        % Move down (col)
+        r = r + 1; % move down
+        while r <= rows && spiral_indices(r, c) == 0
+
+    
+    if c < cols && spiral_indices(r, c + 1) == 0
+        c = c + 1; % Move right (only if able to!)
+    elseif r < rows && spiral_indices(r + 1, c) == 0
+        r = r + 1; % Move down (only if possible)
+    elseif c > 1 && spiral_indices(r, c - 1) == 0
+        c = c - 1; % Move left
+    else
+        r = r - 1; % Move up! Ah ha ha!
     end
-    c = c - 1; % Need to adjust column index to keep from issues
+end
+end 
 
     % Move down on column
-    r = r + 1; % Move down
-    while r <= rows && spiral_indices(r, c) == 0
+  %  r = r + 1; % Move down
+   % while r <= rows && spiral_indices(r, c) == 0
         % fill current position & increment index
-        spiral_indices(r,c) = key_col(num);   
-        num = num+1;   
-        r = r + 1; % Move down
-    end
-    r = r - 1; % Adjust row index to avoid issues
+      %  spiral_indices(r,c) = key_col(num);   
+      %  num = num+1;   
+       % r = r + 1; % Move down
+   % end
+   % r = r - 1; % Adjust row index to avoid issues
    
     % Move left on rows
-    c = c - 1; % Move left
-    while c >= 1 && spiral_indices(r, c) == 0
-        spiral_indices(r, c) = key_col(num);
-        num = num + 1;
-        c = c - 1; % Move left
-    end
-    c = c + 1; % Adjust column index
+  %  c = c - 1; % Move left
+  %  while c >= 1 && spiral_indices(r, c) == 0
+      %  spiral_indices(r, c) = key_col(num);
+   %     num = num + 1;
+     %   c = c - 1; % Move left
+   % end
+   % c = c + 1; % Adjust column index
 
     % Moving up on columns
-    r = r - 1; % Move up
-    while r >= 1 && spiral_indices(r, c) == 0
-        spiral_indices(r, c) = key_col(num);
-        num = num + 1;
-        r = r - 1; % Move up
-    end
-    r = r + 1;
-    c = c + 1;
-end
+   % r = r - 1; % Move up
+  %  while r >= 1 && spiral_indices(r, c) == 0
+     %   spiral_indices(r, c) = key_col(num);
+      %  num = num + 1;
+        %r = r - 1; % Move up
+   % end
+ %   r = r + 1;
+  %  c = c + 1;
+%end
 
-end 
+%end 
 
 
 
