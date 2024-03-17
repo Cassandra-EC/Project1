@@ -27,7 +27,7 @@ end
 
 % Create encrypted image
 encrypted_img = double(xor_img) + double(key_new2);
-encrypted_img = mod(encrypted_img, 256); %wraparound if eneded
+encrypted_img = mod(encrypted_img, 256); %wraparound if needed
 
 % Display original and encrypted images
 figure;
