@@ -5,7 +5,19 @@ function encrypted_img = encrypt_my_img(og_img, key)
 
 
 %=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
-% xor_img + key_new2 = encrypted_img
+% xor_img + key_new2 = encrypted_img 
+
+%%%NEED TO CALL CREATE XOR
+xor_img = create_xor(og_img, key);
+
+% Make key matrix (Call key_to_img2)
+key_new2 = key_to_img2(og_img, key);
+
+% Right image and right key? Check
+if ~isequal(size(og_img), size(key_new2))
+    disp('size issue'); %%REMOVE LATER, for debugging reasons
+end
+
 
 % Create encrypted image
 encrypted_img = xor_img + uint8(key_new2);
