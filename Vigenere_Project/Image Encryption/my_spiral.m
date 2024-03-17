@@ -1,5 +1,6 @@
 % created 3/15/24 CC (referencing Matlab's 'spiral' function)
 % Last edited 3/15/24 CC [still working]
+% 
 
 function spiral_indices = my_spiral(rows, cols)
 % MY_SPIRAL generates spiral_indices for a matrix of size rows x cols
@@ -7,27 +8,26 @@ function spiral_indices = my_spiral(rows, cols)
 
 %=== INITIALIZE VARIABLES
 % matrix to store spiral values. array size = rows*cols
-s = zeros(rows, cols);
-
+spiral_indices = zeros(rows, cols);
 
 % starting position:
 r = 1;      % initialize row index
 c = 1;     % initialize column index
+num = 1;
 
 %=== BEGIN FILLING
-num = 1;
 while num <= rows*cols
     % move right until an 1) edge or 2) filled position
-    while c <= cols && s(r, c) == 0
+    while c <= cols && spiral_indices(r, c) == 0
         % fill current position & increment index
-        s(r,c) = num;   
+        spiral_indices(r,c) = num;   
         num = num+1;   
 
         % decide next movt
-        if c < cols && s(r,c+1) ==0
+        if c < cols && spiral_indices(r,c+1) ==0
             % move right! All's well
             c = c+1;
-        elseif s(r+1,c) ==0
+        elseif r < rows && spiral_indives(r+1, c) ==0
             % move down! Time to switch direction
             r = r+1;
         else
@@ -37,18 +37,16 @@ while num <= rows*cols
     end
 
 
-    while r <= cols && s(r, c) == 0
+    while r <= rows && spiral_indices(r, c) == 0
         % fill current position & increment index
-        s(r,c) = num;   
+        spiral_indices(r,c) = num;   
         num = num+1;   
 
         % decide next movt
-        if c < cols && s(r,c+1) ==0
-            % move right! All's well
-            c = c+1;
-        elseif s(r+1,c) ==0
-            % move down! Time to switch direction
-            r = r+1;
+        if r < rows && spiral_indices(r+1,c) == 0
+            r = r+1; % Move down
+        elseif c > 1 && spiral_indices(r, c-1) == 0
+            c = c-1; % Move left
         else
             %nowhere else to go
             break; 

@@ -1,5 +1,5 @@
 % created 3/15/24 CC. Last edited 3/15/24 CC 
-% using underlying code from SN]
+% using underlying code from SP]
 
 function key_new2 = key_to_img2(og_img, key)
     % SUMMARY: characters of key are used to form an array of same size as
