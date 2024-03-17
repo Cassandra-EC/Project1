@@ -22,9 +22,9 @@ key_new1 = shared_key;
 
 %=== DISPLAY SHARED_KEY AS AN IMAGE [temporary]
 colormap(gray);     %%% CHANGE IF WE DO 3 CHANNELS
-
-% Show image; will scale to fit user's window & use values 0-255
-imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+% 
+% % Show image; will scale to fit user's window & use values 0-255
+% imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 
 end
 
