@@ -3,7 +3,9 @@
 function img_path = ui_image_input()
 % is there a way to have a variable input here? e.g. filename? might make
 % it easier to be dependent on smth, but I may be misunderstanding the
-% funciton
+% function. This might not make total sense so maybe we can sit down like
+% 10 min & discuss quickly [I kind of have an idea but again might not be
+% fully understanding this]
 
 [FileName, PathName] = uigetfile({'*.png;*.jpeg;*.jpg','Select the image you want to encrypt.'});
 %do image url, we could do that
@@ -11,6 +13,8 @@ function img_path = ui_image_input()
 if isequal(FileName, 0)
     disp('User selected Cancel');
     img_path = ''; % empty string if cancel
+    % can we 'return' if canceled? maybe only an issue since my ruining it;
+    % if it was working for you perfectly before then I assume unnecessary
 else 
     disp(['User selected ', fullfile(PathName, FileName)]);
     img_path = fullfile(PathName, FileName); % full path of selected image
