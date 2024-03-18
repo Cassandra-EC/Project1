@@ -2,22 +2,23 @@
 % Edited 3/17/24 SN [output of all 4 images-- can't tell if it is
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
-% edited 3/18/24 CC
+% edited 3/18/24 CC SP
 
+function encrypted_img = encrypt_my_img(og_img, key)
 
-function encrypted_img = encrypt_my_img(my_img, key)
-%%% LAST EDITED 03/17/24 SP 
+%%%% make alternate way to save encrypted_img (out of subplots) for
+%%%% decryption purposes. For when code works, of course
 
 %=== CALL OG_IMG BASED ON USER'S METHOD
 
 
 % rn if nothing is assigned to my_img (e.g. no matrix), will ask for file 
-if isempty(my_img)
+if isempty(og_img) || ~exist(og_img, "var")
    % if using ui_image_input
-img_path = ui_image_input();
+    img_path = ui_image_input();
     og_img = img_path;
 else
-    og_img = my_img;
+    og_img = og_img;
 end
 
 % elseif using url
