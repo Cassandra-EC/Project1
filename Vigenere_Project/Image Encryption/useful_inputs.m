@@ -82,7 +82,7 @@ petals = mod(atan2(y - size(og_img, 1) / 2, x - size(og_img, 2) / 2) + pi / 6, 2
 petals = petals .* (r < size(og_img, 1) / 2) * 255;
 
 % Set flower colors
-flower_color = [255, 0, 0]; % Red color
+flower_color = [255, 70, 0]; % Red color
 
 % Apply flower colors to the image
 for i = 1:3
