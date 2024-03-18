@@ -7,6 +7,10 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %image_file = uigetfile SP, working to allow user to upload,,, uigetfile
 %command matlab, looking into it more
 
+
+% ensure og_img is uint8
+og_img = uint8(og_img);
+
 %=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
 % xor_img + key_new2 = encrypted_img 
 
@@ -42,7 +46,7 @@ axis off;
 
 subplot(1, 4, 2);
 imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('XOR Image');
+title('XOR Image (Original - Key)');
 axis off;
 
 subplot(1, 4, 3);
