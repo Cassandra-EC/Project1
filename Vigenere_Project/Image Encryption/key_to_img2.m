@@ -61,6 +61,8 @@ else
     key_new2 = my_spiral(rows, cols, shared_key);
 end
 
+% Element-wise multiplication of key_new2
+key_new2 = key_new2 .* shared_key_copy;
 
 %=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
 key = key_copy;

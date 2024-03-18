@@ -30,7 +30,7 @@ key_new2 = key_to_img2(encrypted_img, key);
 % They seem to be identical! 3/17
 
 %%% encrypted_img - key_new2 = xor_img 
-return_xor_img = double(encrypted_img) - double(key_new2);
+return_xor_img = double(encrypted_img) ./ double(key_new2);
 return_xor_img = mod(return_xor_img, 256); % Wraparound if needed
 
 imshow(return_xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');

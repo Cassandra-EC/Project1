@@ -22,8 +22,8 @@ key_new1 = key_to_img1(encrypted_img, key);
 %=== RETURN OG_IMG FROM XOR_IMG (in turn from encrypted img)
 % it is SO CLOSE, but there is definite variability
 
-%%% xor_img + key_new1 = og_img 
-return_og_img = (return_xor_img) + double(key_new1);
+%%% xor_img - key_new1 = og_img 
+return_og_img = (return_xor_img) - double(key_new1);
 return_og_img = mod(return_og_img, 256); % Wraparound if needed
 
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
