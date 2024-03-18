@@ -1,10 +1,15 @@
-function encrypted_img = encrypt_my_img(og_img, key)
+function encrypted_img = encrypt_my_img(key)
 %%% LAST EDITED 03/17/24 SP [output of all 4 images-- can't tell if it is
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 
 %=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
+og_img_path = ui_image_input();
 
+%ADD case for user-cancelling input
+
+% Load user-selected image
+og_img = imread(og_img_path);
 
 % ensure og_img is uint8
 og_img = uint8(og_img);
