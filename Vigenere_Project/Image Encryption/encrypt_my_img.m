@@ -4,9 +4,15 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%% too.
 
 %=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
-%image_file = uigetfile SP, working to allow user to upload,,, uigetfile
-%command matlab, looking into it more
+[image_file, image_path] = uigetfile{'*.png;*.jpeg','Select the iamge you want to encrypt.'};
+if isequal(image_file, 0)
+    disp('User selected Cancel');
+else 
+    disp(['User selected ', fullfile(image_path, image_file)]);
+end
+   
 
+og_img = imread(fullfile(image_path, image_file));
 
 % ensure og_img is uint8
 og_img = uint8(og_img);
