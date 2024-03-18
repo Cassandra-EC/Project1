@@ -3,17 +3,6 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 
-%=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
-[image_file, image_path] = uigetfile{'*.png;*.jpeg','Select the image you want to encrypt.'};
-if isequal(image_file, 0)
-    disp('User selected Cancel');
-else 
-    disp(['User selected ', fullfile(image_path, image_file)]);
-end
-   
-
-og_img = imread(fullfile(image_path, image_file));
-
 % ensure og_img is uint8
 og_img = uint8(og_img);
 
