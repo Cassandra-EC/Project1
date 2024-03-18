@@ -24,8 +24,8 @@ return_og_img = decrypt_my_img(encrypted_img, key);
  
 %=== 3-CHANNEL OG_IMG INPUT [RED,GREEN]
 og_img=zeros(30,40,3); %initialize
- og_img(:,1:10,1)=0.5;   %Red (dark red)
- og_img(:,11:20,1)=1;   %Red (maximum value)
+ og_img(:,1:10,1)= 15;   %Red (dark red)
+ og_img(:,11:20,1)=100;   %Red (maximum value)
  og_img(1:10,:,2)=rand(10,40);  %Green
  figure, imshow(og_img)
 
