@@ -41,7 +41,7 @@ axis off;
 
 subplot(1, 4, 2);
 imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('XOR Image (Original - Key)');
+title('XOR Image (original + key)');
 axis off;
 
 subplot(1, 4, 3);
