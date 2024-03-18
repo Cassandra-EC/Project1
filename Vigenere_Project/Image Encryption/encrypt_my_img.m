@@ -3,12 +3,8 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 
-% <<<<<<< HEAD
-% =======
-% %=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
-% 
-% 
-% >>>>>>> 2c108624267ab7735d10eb4c58e83c04a2c25ede
+%=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
+
 % ensure og_img is uint8
 og_img = uint8(og_img);
 
@@ -34,7 +30,7 @@ end
 
 
 % Create encrypted image
-encrypted_img = double(xor_img) + double(key_new2);
+encrypted_img = double(xor_img) .* double(key_new2);
 encrypted_img = mod(encrypted_img, 256); %wraparound if needed
 encrypted_img = uint8(encrypted_img);
 
