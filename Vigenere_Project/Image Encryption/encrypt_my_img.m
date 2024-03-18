@@ -3,6 +3,12 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 
+% <<<<<<< HEAD
+% =======
+% %=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
+% 
+% 
+% >>>>>>> 2c108624267ab7735d10eb4c58e83c04a2c25ede
 % ensure og_img is uint8
 og_img = uint8(og_img);
 
