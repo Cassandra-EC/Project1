@@ -1,6 +1,6 @@
 % created 3/18/24 SN. Edited 3/18 CC
 
-function og_img = ui_image_input()
+function img_path = ui_image_input()
 % is there a way to have a variable input here? e.g. filename? might make
 % it easier to be dependent on smth, but I may be misunderstanding the
 % funciton
@@ -23,8 +23,8 @@ img_path = ui_image_input();
 
 %ADD case for user-cancelling input
 
-% Load user-selected image
-og_img = imread(img_path);
+%%% Load user-selected image
+% og_img = imread(img_path);
 
 
 %%%ADD IF STATEMENT (here or in encrypted_img?) <-- almost def in encrypted

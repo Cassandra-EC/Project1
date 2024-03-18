@@ -61,8 +61,10 @@ else
     key_new2 = my_spiral(rows, cols, shared_key);
 end
 
-% Element-wise multiplication of key_new2
-key_new2 = key_new2 .* shared_key_copy;
+% ELEMENT-WISE MULTIPLICATION TO CREATE KEY_NEW2
+% use double for proper multiplication; convert to uint8 to show properly
+key_new2 = double(key_new2) .* double(shared_key_copy);
+key_new2 = uint8(key_new2);
 
 %=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
 key = key_copy;
