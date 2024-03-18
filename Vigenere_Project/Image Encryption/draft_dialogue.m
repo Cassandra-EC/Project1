@@ -6,8 +6,8 @@
 % resizeable in the horizontal direction, whether it is modal, and whether 
 % the prompt text is interpreted.
 
-prompt = {'URL for desired image', 'Desired key (non-alphabetical symbols accepted!'};
-title = input;
-
-og_img?? = inputdlg(prompt, title, fieldsize, opts.Resize = 'on', opts.WindowStyle = 'normal');
-    
+% prompt = {'URL for desired image', 'Desired key (non-alphabetical symbols accepted!'};
+% title = input;
+% 
+% og_img?? = inputdlg(prompt, title, fieldsize, opts.Resize = 'on', opts.WindowStyle = 'normal');
+% 
