@@ -1,29 +1,32 @@
 % created 3/18/24 SN. Edited 3/18 CC
 
-function img_path = ui_image_input()
-% is there a way to have a variable input here? e.g. filename? might make
-% it easier to be dependent on smth, but I may be misunderstanding the
-% function. This might not make total sense so maybe we can sit down like
-% 10 min & discuss quickly [I kind of have an idea but again might not be
-% fully understanding this]
+function img_path = upload_file()
+%=== SUMMARY: creates a path to a jpg, jpeg, or png file that can be used
+%as og_img.
 
+
+% 
+
+% stores name of file & path; opens finder window & creates a dialog box 
 [FileName, PathName] = uigetfile({'*.png;*.jpeg;*.jpg','Select the image you want to encrypt.'});
+
+
 %do image url, we could do that
 %{'*.png;*.jpeg','Select the image you want to encrypt.'};
+
+% if nothing is chosen [was canceled], set img_path to an empty string
 if isequal(FileName, 0)
     disp('User selected Cancel');
     img_path = ''; % empty string if cancel
-    % can we 'return' if canceled? maybe only an issue since my ruining it;
-    % if it was working for you perfectly before then I assume unnecessary
+    
+
 else 
     disp(['User selected ', fullfile(PathName, FileName)]);
-    img_path = fullfile(PathName, FileName); % full path of selected image
+    img_path = fullfile(PathName, FileName);    % full path of selected image
+
 end
    
 
-%=== ALLOW FOR IMAGE UPLOAD (link, copy/paste, multiple options????)
-% set og_img equal to ui_image_input (if choosing to use it)
-img_path = ui_image_input();
 
 %ADD case for user-cancelling input
 
