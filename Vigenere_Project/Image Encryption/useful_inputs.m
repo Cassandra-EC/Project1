@@ -8,6 +8,15 @@ xor_img = create_xor(og_img, key);
 subplot(1,2,2);
 return_xor_img = return_xor(encrypted_img, key);
 
+%=== CREATE VS RETURN OG
+subplot(1,2,1);
+imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+title('Original Image');
+axis off;
+
+subplot(1,2,2);
+return_og_img = decrypt_my_img(encrypted_img, key);
+
 
 
 
