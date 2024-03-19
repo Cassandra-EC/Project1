@@ -27,11 +27,11 @@ key_new1 = key_to_img1(encrypted_img, key);
 %%% xor_img - key_new1 = og_img 
 return_og_img = (return_xor_img) - double(key_new1);
 return_og_img = floor(mod(return_og_img, 256)); % Wraparound if needed
+return_og_img = uint8(return_og_img);
 
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('OG Image (return from encrypted)');
 axis off;
-
 
 
 end
