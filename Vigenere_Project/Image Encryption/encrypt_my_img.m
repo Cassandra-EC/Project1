@@ -9,21 +9,8 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%%% make alternate way to save encrypted_img (out of subplots) for
 %%%% decryption purposes. For when code works, of course
 
+
 %=== CALL OG_IMG BASED ON USER'S METHOD
-
-
-% rn if nothing is assigned to my_img (e.g. no matrix), will ask for file 
-if isempty(og_img) || ~exist(og_img, "var")
-   % if using ui_image_input
-    img_path = ui_image_input();
-    og_img = img_path;
-else
-    og_img = og_img;
-end
-
-% elseif using url
-% elseif using matrix they made
-
 
 % %=== confirm class of variables
 % % ensure og_img is uint8
@@ -55,7 +42,8 @@ end
 
 
 % Create encrypted image
-encrypted_img = double(xor_img) + double(key_new2);
+% xor * key_new2 = encrypted img
+encrypted_img = double(xor_img) .* double(key_new2);
 encrypted_img = mod(encrypted_img, 256); %wraparound if needed
 
 

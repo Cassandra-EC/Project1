@@ -63,9 +63,10 @@ end
 
 
 %=== SCALE KEY TO SPAN 0-255 (only integer values)
-max_value = max(shared_key(:));
+% max_value = max(shared_key(:));
 
-shared_key = round(double(shared_key) / max_value * 255);
+shared_key = mod(shared_key, 256);
+
 
 % convert to uint8 (fit any outside values within range)
 shared_key = uint8(shared_key);

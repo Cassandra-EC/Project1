@@ -34,6 +34,7 @@ shared_key = process_key(og_img, key);
 
 
 
+
 % how many channels are in the input?
 num_channels = size(shared_key, 3);
 shared_key_copy = shared_key;
@@ -46,8 +47,7 @@ if num_channels >1
     % get values for rows & columns [parameters for my_spiral output]
     [rows, cols] = size(shared_key);
     key_new2 = my_spiral(rows, cols, shared_key);
-
-    shared_key = shared_key_copy;
+    key_new2 = mod(key_new2, 256);
 
     % copy spiral over original # of channels
     key_new2 = repmat(key_new2, [1, 1, num_channels]);
@@ -61,13 +61,14 @@ else
     key_new2 = my_spiral(rows, cols, shared_key);
 end
 
-% ELEMENT-WISE MULTIPLICATION TO CREATE KEY_NEW2
-% use double for proper multiplication; convert to uint8 to show properly
-key_new2 = double(key_new2) .* double(shared_key_copy);
-key_new2 = uint8(key_new2);
+% % ELEMENT-WISE MULTIPLICATION TO CREATE KEY_NEW2
+% % use double for proper multiplication; convert to uint8 to show properly
+% key_new2 = double(key_new2) .* double(shared_key_copy);
+% %key_new2 = uint8(key_new2);
+% 
+% %=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
+% shared_key = shared_key_copy;
 
-%=== RESTORE ORIGINAL VERSION OF KEY (no repeats)
-key = key_copy;
 
 end
 
