@@ -23,7 +23,7 @@ function og_img = image_dialogue();
 % 
 
 
-Call this at start of encrypt_my_img
+%Call this at start of encrypt_my_img
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 

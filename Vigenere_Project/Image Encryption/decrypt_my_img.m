@@ -17,7 +17,10 @@ return_xor_img = return_xor(encrypted_img, key);
 %%% key_new1
 key_new1 = key_to_img1(encrypted_img, key);
 
-
+% key_new2
+key_new2 = key_to_img2(size(encrypted_img), key);
+key_new2 = uint8(key_new2);
+reciprocal_key_new2 = 1 ./ double(key_new2);
 
 %=== RETURN OG_IMG FROM XOR_IMG (in turn from encrypted img)
 % it is SO CLOSE, but there is definite variability
@@ -25,15 +28,15 @@ key_new1 = key_to_img1(encrypted_img, key);
 %%% THIS IS SUPER FUCKED UP NOW. NEED TO FIX DECRYPTION IF WE OFFER IT
 % (& go through everything to debug. Make sure equations are all correct)
 %%% xor_img - key_new1 = og_img 
-return_og_img = (return_xor_img) - double(key_new1);
-return_og_img = floor(mod(return_og_img, 256)); % Wraparound if needed
+
+return_og_img = double(return_xor_img) .* (reciprocal_key_new2); %issue with 0 as divisor??
+return_og_img = mod(return_og_img, 256); % Wraparound if needed
 return_og_img = uint8(return_og_img);
 
 figure(1)
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('OG Image (return from encrypted)');
 axis off;
-
 
 end
 
