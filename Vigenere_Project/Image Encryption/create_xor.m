@@ -18,10 +18,10 @@ xor_img = mod(xor_img, 256);
 xor_img = uint8(xor_img);
 
 
-%=== SHOW XOR (for debugging, comment out if not needed)
-imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('XOR Image (from creation)');
-axis off;
+% %=== SHOW XOR (for debugging, comment out if not needed)
+% imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+% title('XOR Image (from creation)');
+% axis off;
 
 end
 

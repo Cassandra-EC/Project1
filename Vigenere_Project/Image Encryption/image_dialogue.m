@@ -1,12 +1,6 @@
 % created 3/18 CC
-% Edited 03/20 SP
-
-
-%%% DEALING WITH DIALOGUE BOXES & INPUTs
-% image input [call this in another function most likely]: let the user
-% choose to input a 1) file, 2) url, or 3) create their own matrix for
-% encryption. Includes informative & 'lively' prompts from the site
-
+% Edited 03/20 SP-- functional and returns encrypted image upon completion
+% of dialogue boxes, etc
 
 %answer = inputdlg(prompt,dlgtitle,fieldsize,definput,opts)specifies that the 
 % dialog box is resizeable in the horizontal direction when opts is set to 
@@ -14,14 +8,6 @@
 % resizeable in the horizontal direction, whether it is modal, and whether 
 % the prompt text is interpreted.
 
-% prompt = {'URL for desired image', 'Desired key (non-alphabetical symbols accepted!'};
-% title = input;
-% 
-% og_img?? = inputdlg(prompt, title, fieldsize, opts.Resize = 'on', opts.WindowStyle = 'normal');
-% 
-
-
-%Call this at start of encrypt_my_img
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 function encrypted_img = image_dialogue()
@@ -98,31 +84,37 @@ end
 imshow(og_img);
 title('Your Image');
 axis off;
-    
-confirm_encrypt = questdlg('Is this the image you would like to encrypt?', 'Confirm Image and Encryption', 'Encrypt', 'Cancel', 'Encrypt');
+   
+% Loop for confirmation
+while true
+    confirm_encrypt = questdlg('Is this the image you would like to encrypt?', 'Confirm Image and Encryption', 'Encrypt', 'Cancel', 'Encrypt');
 
-% Check user's response
-if strcmp(confirm_encrypt, 'Encrypt')
-    % Ask user for key input
-    key_cell = inputdlg('Enter an encryption key:', 'Key Input', [1, 50]);
+    % Check user's response
+    if strcmp(confirm_encrypt, 'Encrypt')
+        % Ask user for key input
+        key_cell = inputdlg('Enter an encryption key:', 'Key Input', [1, 50]);
         
-    % Check for key
-    if isempty(key_cell)
-        error('No encryption key provided.');
+        % Check for key
+        if isempty(key_cell)
+            error('No encryption key provided.');
+        end
+    
+        % Extract key (key cannot be used when cell array)
+        key = key_cell{1};
+        
+        % Encrypt!
+        encrypted_img = encrypt_my_img(og_img, key);
+        disp('Encryption successful!');
+        break; % Exit loop
+
+    elseif strcmp(confirm_encrypt, 'Cancel')
+        disp('Encryption canceled.');
+        encrypted_img = [];
+        break; % Exit loop
+    else 
+        disp('Unexpected error. Encryption canceled.');
+        encrypted_img = [];
+        break; % Exit loop
     end
-    
-    % Extract key (key cannot be used when cell array)
-    key = key_cell{1};
-    
-    % Encrypt!
-    encrypted_img = encrypt_my_img(og_img, key);
-    disp('Encryption successful!');
-elseif strcmp(confirm_encrypt, 'Cancel')
-    disp('Encryption canceled.');
-    encrypted_img = [];
-else 
-    disp('Unexpected error. Encryption canceled.');
-    encrypted_img = [];
-end
 
 end
