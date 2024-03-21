@@ -18,20 +18,17 @@ function img_path = upload_file()
 if isequal(FileName, 0)
     disp('User selected Cancel');
     img_path = ''; % empty string if cancel
-    
+    og_img = [];
 
 else 
     disp(['User selected ', fullfile(PathName, FileName)]);
     img_path = fullfile(PathName, FileName);    % full path of selected image
-
+    og_img = imread(im_path);
 end
    
 
 
-%ADD case for user-cancelling input
 
-%%% Load user-selected image
-% og_img = imread(img_path);
 
 
 %%%ADD IF STATEMENT (here or in encrypted_img?) <-- almost def in encrypted

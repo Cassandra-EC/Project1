@@ -1,7 +1,9 @@
 % created 3/18 CC
 
 
-function og_img = image_dialogue();
+function og_img = image_dialogue()
+
+
 
 
 %%% DEALING WITH DIALOGUE BOXES & INPUTs
@@ -36,19 +38,67 @@ function og_img = image_dialogue();
 
 % === DIALOGUE TREE: 3 OPTIONS FOR IMAGE UPLOAD
 
-image_prompt = "How would you like to upload your image? 1/2/3: ";
-image_preference = input(image_prompt, "s");
+options = {'Upload image from file', 'Provide image URL', 'Create image array'};
+% gives 3 options, if user hits return, defaults to upload from file
+image_preference = questdlg('How would you like to upload your image?', 'Image Upload', options{1}, options{2}, options{3}, options{1});
 
 if isempty(image_preference)
     error('Please enter a preference for your image upload (either 1, 2, or 3)');
+end
 
-
-elseif contains(image_preference, '1')==1 && contains(image_preference, '2')==0 && contains(image_preference, '3')==0 
+% if user selects upload image from file
+if strcmp(image_preference, options{1})
     disp("Excellent. You've chosen to upload an image file from your device.")
-    img_path = upload_file();
-    og_img = imread(img_path);
+    [file_name, file_path] = uigetfile({'*.jpg, *.jpeg, *.png', 'Image Files'}, 'Select Image File');
+    % case for user cancelling input
+    if isequal(file_name, 0) || isequal(file_path, 0)
+        error('No image file selected.');
+    end
     
-    %=== CHECK IF IMG IS VIABLE; OTHERWISE MAKE TRY AGAIN
+    % load and read image for encryption
+    img_path = fullfile(file_path, file_name);
+    og_img = imread(img_path);
+
+% if user selects provide image URL
+elseif strcmp(image_preference, options{2})
+    img_url = inputdlg('Enter the URL of your image:', 'Image URL', [1, 100]);
+    % case for no URL provided
+    if isempty(img_url)
+        error('No image URL entered.');
+    end
+
+    % Extract the URL (in position {1} of img_url)
+    img_url = img_url{1};
+
+    try
+        % Attempt to read image from URL
+        og_img = webread(img_url);
+
+        imshow(og_img);
+        title('Downloaded Image');
+        axis off;
+    catch
+        error('Failed to read your image from provided URL.');
+    end
+
+%%% array upload option
+
+else
+    error('Invalid option selected.');
+end
+    
+% Display image for confirmation
+imshow(og_img);
+title('Your Image');
+axis off;
+
+confirm_img = questdlg('Is this the image you would like to encrypt?', 'Confirm Image', 'Yes', 'No', 'Yes');
+if isempty(confirm_img) || strcmp(confirm_img, 'No')
+    error('Image selection canceled.');
+end
+
+%=== CHECK IF IMG IS VIABLE; OTHERWISE MAKE TRY AGAIN
+
 
 
 
