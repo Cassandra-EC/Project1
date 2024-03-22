@@ -6,6 +6,8 @@ function return_og_img = decrypt_my_img(encrypted_img, key, og_img)
 %%% decryption
 %%%% CC:ERROR ADD SUMMARY ADD INPUTS ADD OUTPUTS
 
+%=== 'UNROTATE' encrypted_img (was rotated 180 before)
+encrypted_img = imrotate(encrypted_img, 180);
 
 %=== LOAD KEY3, using encrypted_img as size reference
 key_new3 = key_to_img3(encrypted_img, key);
