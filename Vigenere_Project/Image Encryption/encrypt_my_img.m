@@ -25,23 +25,19 @@ function encrypted_img = encrypt_my_img(og_img, key)
 
 
 %=== KEY PREPARATION ===%
-%%% CALL KEY_NEW1: img from 'key' numeric values repeating through rows
-key_new1 = uint8(key_to_img1(og_img, key));
+%%% CALL KEY_NEW1: straightforward key
+key_new1 = key_to_img1(og_img, key);
+
+%%% CALL KEY_NEW2: spiral key
+key_new2 = key_to_img2(og_img, key);
 
 
-%%% CALL KEY_NEW2: img from 'key' numeric values repeating in a spiral (from center)
-key_new2 = uint8(key_to_img2(og_img, key));
-
-
-%%% SET KEY_NEW3: img from key_new1 x key_new2 (element-wise)
-key_new3 = key_new1.*key_new2;
-%key_new3 made to fit 0-256. not a necessity! just for display if desired
-mod(key_new3, 256);         
-disp(key_new3);
+%%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
+key_new3 = key_to_img3(og_img, key);
 
 
 %%% ENCRYPT IMAGE: new img from og_img + key_new3
-encrypted_img = double(og_img) .* double(key_new3);
+encrypted_img = double(og_img) + double(key_new3);
 mod(encrypted_img, 256);
 
 
@@ -107,7 +103,7 @@ imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('ENCRYPTED');
 axis off;
 
-% ADD ANOTHER FIGURE HERE !!!!
+% ADD ANOTHER FIGURE HERE !!!! CC:ERROR
 
 
 end
