@@ -29,7 +29,10 @@ return_og_img = xor_img2 - double(key_new1_scaled);
 return_og_img = max(return_og_img, 0);
 
 % Wraparound, if needed
-return_og_img = mod(return_og_img, 256);
+%%return_og_img = mod(return_og_img, 256);
+
+% TESTING SCALING, not mod
+return_og_img = max(min(return_og_img, 255), 0);
 
 
 figure;
