@@ -9,9 +9,15 @@ key_new2 = uint8(key_to_img2(encrypted_img, key));
 
 xor_img2 = double(encrypted_img) ./ double(key_new2);
 xor_img2 = mod(xor_img2, 256); % Wraparound values?
+% keep in range (test)
+xor_img2 = max(0, min(xor_img2, 255));
+
 
 return_og_img = xor_img2 - double(key_new1);
 return_og_img = mod(return_og_img, 256);
+
+% keep in range (test)
+return_og_img = max(0, min(return_og_img, 255))
 
 % xor
 % return_xor_img = return_xor(encrypted_img, key);
@@ -33,8 +39,8 @@ return_og_img = mod(return_og_img, 256);
 % [debug] Confirm that og_img and key_new2 are the same size
 if ~isequal(size(encrypted_img), size(key_new2))
     disp('size issue'); %%REMOVE LATER, for debugging reasons
-    size(encrypted_img)
-    size(key_new2)
+    size(encrypted_img);
+    size(key_new2);
 end
 
 
