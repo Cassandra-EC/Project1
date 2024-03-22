@@ -1,23 +1,13 @@
 % created 3/18 CC
 % Edited 03/20 SP-- functional and returns encrypted image upon completion
 % of dialogue boxes, etc
-% debugging 3/22 CC. Renamed to 'e_dlg' for now. ERRORS/Qs BEGIN W '%CC:ERROR'
-
-%answer = inputdlg(prompt,dlgtitle,fieldsize,definput,opts)specifies that the 
-% dialog box is resizeable in the horizontal direction when opts is set to 
-% 'on'. When opts is a structure, it specifies whether the dialog box is 
-% resizeable in the horizontal direction, whether it is modal, and whether 
-% the prompt text is interpreted.
-
-
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
-function encrypted_img = dialog_input()
-    %%% consi
+function img_input = dialog_input()
 
     %=== ASK USER FOR IMAGE SUBMISSION; 3 OPTIONS (file, url, code own matrix)
 
-    while true      % option window appears & remains until one is chosen
+    while true
         options = {'Upload image from file', 'Provide image URL', 'Create image array'};
         
         try
@@ -59,13 +49,6 @@ function encrypted_img = dialog_input()
                 try
                     % Attempt to read image from URL
                     img = webread(img_url);
-
-                    %CC:ERROR    
-                    % does this show the img? Guessing we want to save for later, 
-                    % since that happens in the image confirmation portion
-                    imshow(img);
-                    title('Downloaded Image');
-                    axis off;
                     break; % Exit loop
                 catch
                     error('Failed to read your image from provided URL.');
@@ -96,35 +79,19 @@ function encrypted_img = dialog_input()
             else
                 error('Invalid option selected.');
             end
+            
+            %%% SIZE CHECK, once img loaded
+            if img_size > size_lim
+                disp('Image size exceeds the maximum allowed size.');
+                disp('Please select a different image.');
+                continue; % Restart the loop to select another image
+            end
 
         catch
             disp('An error occurred! Please try again.');
         end
     end
     
-%%% %CC:ERROR - GUESSING THIS IS NOT NEEDED NOW? WANT TO CONFIRM
-    % if isempty(image_preference)
-    %     error('Please enter a preference for your image upload (either 1, 2, or 3)');
-    % end
-
-    
-            %CC:ERROR 
-            % %%LOOP BACK SOMEWHERE FROM HERE!! RESTART WHOLE FUNCTION, SOME DIALOGUE?
-
-     
-    
-
-
-
-
-% CC:ERROR   IMAGE SHOULD GO AWAY AFTER BEING CONFIRMED! 
-% As well as after being rejected. otherwise clogs up w repetition & gets
-% confusing once encryption appears. Should be quick
-
-
-
-% confirm & let user cancel if not the desired result
-%=== DISPLAY USER'S IMAGE FOR CONFIRMATION
 
 % show image
 figure(1);
@@ -133,38 +100,39 @@ title('IMAGE SELECTED');
 axis off;
            
 while true
-confirm_encrypt = questdlg('Is this the image you would like to encrypt?', 'Confirm Image and Encryption', 'Encrypt', 'Cancel', 'Encrypt');
+confirm_use = questdlg('Is this the image you would like to use?', 'Confirm Image', 'Use this!', 'Cancel', 'Use this!');
  
      % Check user's response
-     if strcmp(confirm_encrypt, 'Encrypt')
+     if strcmp(confirm_use, 'Use this!')
+         % Close image
+         close(1);
          % Ask user for key input
-         key_cell = inputdlg('Enter an encryption key:', 'Key Input', [1, 50]);
+         key_cell = inputdlg('Enter key! Be creative! The longer and cooler your key, the stronger the encryption B)', 'Key Input', [1, 50]);
  
  
          % Check for key
          if isempty(key_cell)
-             error('No encryption key provided.');
+             error('No key provided.');
          end
  
          % Extract key (key cannot be used when cell array)
          key = key_cell{1};
          % Save key as variable in Workspace
          assignin('base', 'key', key);
- 
-         % Encrypt!
-         encrypted_img = encrypt_my_img(og_img, key);
-         disp('Encryption successful!');
          break; % Exit loop
  
-     elseif strcmp(confirm_encrypt, 'Cancel')
-         disp('Encryption canceled.');
-         encrypted_img = [];
+     elseif strcmp(confirm_use, 'Cancel')
+         disp('Image canceled.');
+         img = [];
          break; % Exit loop
      else 
-         disp('Unexpected error. Encryption canceled.');
-         encrypted_img = [];
+         disp('Unexpected error. Image canceled.');
+         img = [];
          break; % Exit loop
      end
  
 end
+
+img_input = img;
+
 end
