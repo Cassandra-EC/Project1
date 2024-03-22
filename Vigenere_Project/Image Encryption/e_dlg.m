@@ -29,6 +29,7 @@ while true      % option window appears & remains until one is chosen
     % if isempty(image_preference)
     %     error('Please enter a preference for your image upload (either 1, 2, or 3)');
     % end
+    try
 
     %=== FILE UPLOAD DIALOGUE 
     if strcmp(image_preference, options{1})
@@ -67,12 +68,12 @@ while true      % option window appears & remains until one is chosen
         % ATTEMPT TO READ IMG. If failed, give error
         try
             % Attempt to read image from URL
-            og_img = webread(img_url);
+            img = webread(img_url);
             
             %CC:ERROR    
             % does this show the img? Guessing we want to save for later, 
             % since that happens in the image confirmation portion
-            imshow(og_img);
+            imshow(img);
             title('Downloaded Image');
             axis off;
             break; % Exit loop
@@ -83,30 +84,47 @@ while true      % option window appears & remains until one is chosen
     % if user selects array upload option
     elseif strcmp(image_preference, options{3})
          disp("A fellow coder! You've chosen to create an array to use as your image.");
-         disp("Please create your image array and title it 'og_img'.");
+         disp("Please create your image array and title it 'img'.");
     
          %msgbox("Create your image array. Click OK when= you're done!", 'Image Array Creation');
         
          % Wait for user to click
-         uiwait(msgbox("Create your image 'og_img'. Click OK when done!", 'Create og_img'));
+         uiwait(msgbox("Create your image 'img'. Click OK when done!", 'Create img'));
         
          % If img not set to og_img, error message
-         if exist('og_img', 'var') == 0
-             print('og_img');
-             error("NO IMAGE ARRAY SUBMITTED. PLEASE MAKE SURE TO ASSIGN YOUR IMAGE YOUR IMAGE TO THE VARIABLE NAME 'og_img'");
+         if exist('img', 'var') == 0
+             print('img');
+             error("NO IMAGE ARRAY SUBMITTED. PLEASE MAKE SURE TO ASSIGN YOUR IMAGE YOUR IMAGE TO THE VARIABLE NAME 'img'");
             
              %CC:ERROR 
              %%% ADD LOOP/SEND BACK TO SUBMISSION POSSIBILITY!! %%%
 
          end
-         break; % Exit loop
-    
     % ERROR IF USER TAKES ANOTHER ACTION (somehow)
     else
         error('Invalid option selected.');
     end
+    
+    
+    % Check size of image
+    img_info = imfinfo(img)
+    img_size = img_info.FileSize; %FileSize built into imfinfo
+    size_lim = 240000; % Max is 240 Kb
 
+    % Size check
+    if img_size > size_lim
+        disp('Image size exceeds the maximum allowed size.');
+        disp('Please select a different image or create a smaller matrix.');
+        %%% add code to reloop you to beginning.
+    end
+
+    catch
+        % If error, restart loop
+        disp('An error occurred! Please try again.');
+        continue; % restart loop
+    end
 end
+
 
  %CC:ERROR    EACH IMAGE NEEDS TO BE CHECKED FOR MAX SIZE. IF IT'S TOO BIG
  %THEY NEED TO RESELECT. Again would need to loop to the start. My thought
@@ -143,7 +161,7 @@ end
  % they get this function to start
 
 
-
+%max 240 kb
 
 
 %=== DISPLAY USER'S IMAGE FOR CONFIRMATION
