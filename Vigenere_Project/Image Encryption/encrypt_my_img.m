@@ -56,28 +56,34 @@ encrypted_img = uint8(encrypted_img);
 
 %%% SHOW ORIGINAL IMAGE
 figure;
-subplot(1, 4, 1);
+subplot(1, 5, 1);
 imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Original Image');
 axis off;
 
 
 %%% SHOW XOR IMAGE
-subplot(1, 4, 2);
+subplot(1, 5, 2);
 imshow(xor_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('XOR Image (Original + Key)');
 axis off;
 
 %%% SHOW SPIRAL KEY
-subplot(1, 4, 3);
+subplot(1, 5, 3);
 imshow(key_new2, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Key 2 (spiral)');
 axis off;
 
 %%% SHOW FINAL IMAGE
-subplot(1, 4, 4);
+subplot(1, 5, 4);
 imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('Encrypted Image');
+axis off;
+
+%%% KEY NEW 1 for debugging
+subplot(1, 5, 5);
+imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+title('Key new1');
 axis off;
 
 

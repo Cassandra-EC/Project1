@@ -101,6 +101,8 @@ while true
     
         % Extract key (key cannot be used when cell array)
         key = key_cell{1};
+        % Save key as variable in Workspace
+        assignin('base', 'key', key);
         
         % Encrypt!
         encrypted_img = encrypt_my_img(og_img, key);
