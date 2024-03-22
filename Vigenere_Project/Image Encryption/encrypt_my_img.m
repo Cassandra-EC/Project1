@@ -13,25 +13,24 @@ function encrypted_img = encrypt_my_img(og_img, key)
 % version. The formula is as follows: og_img + (key_new1*key_new2) =
 % encrypted_img
 
-%%% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
+% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
 % accepted). Can also decrypt using the decrypt_my_img function
 
     %%% INPUTS:
         % og_img = an original input image
-        % key = text (ASCII characters) used to encrypt the og_img
+        % key = some text (ASCII non-alphabetical characters also accepted)
+        % used to encrypt the og_img
     
     %%% OUTPUTS: 
         % encrypted_img = a new image made using both og_img and the key
 
 
 %=== KEY PREPARATION ===%
-%%% CALL KEY_NEW1: straightforward key
-key_new1 = key_to_img1(og_img, key);
 
-<<<<<<< Updated upstream
 %%% CALL KEY_NEW2: spiral key
 key_new2 = key_to_img2(og_img, key);
-=======
+
+
 % %=== confirm class of variables
 % % ensure og_img is uint8
 % og_img = uint8(og_img);
@@ -40,26 +39,22 @@ key_new2 = key_to_img2(og_img, key);
 % class(xor_img);
 % class(key_new2);
 
-%=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
-% xor_img + key_new2 = encrypted_img 
 
-%%% NEED TO CALL KEY TO IMG 1
-key_new1 = uint8(key_to_img1(og_img, key));
 
-% %%%NEED TO CALL CREATE XOR
-% xor_img = uint8(create_xor(og_img, key_new1));
 
-% Make key matrix (Call key_to_img2)
+%%% CALL KEY_NEW2: img from 'key' numeric values repeating in a spiral (from center)
 key_new2 = uint8(key_to_img2(og_img, key));
->>>>>>> Stashed changes
 
 
-%%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
-key_new3 = key_to_img3(og_img, key);
+%%% SET KEY_NEW3: img from key_new1 x key_new2 (element-wise)
+key_new3 = key_new1 .* key_new2;
+%key_new3 made to fit 0-256. not a necessity! just for display if desired
+mod(key_new3, 256);         
+disp(key_new3);
 
 
 %%% ENCRYPT IMAGE: new img from og_img + key_new3
-encrypted_img = double(og_img) + double(key_new3);
+encrypted_img = double(og_img) .* double(key_new3);
 mod(encrypted_img, 256);
 
 
@@ -125,7 +120,7 @@ imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('ENCRYPTED');
 axis off;
 
-% ADD ANOTHER FIGURE HERE !!!! CC:ERROR
+% ADD ANOTHER FIGURE HERE !!!!
 
 
 end
