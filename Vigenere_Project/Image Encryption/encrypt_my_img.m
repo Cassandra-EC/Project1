@@ -41,7 +41,10 @@ mod(key_new3, 256);
 
 %%% ENCRYPT IMAGE: new img from og_img + key_new3
 encrypted_img = double(og_img) + double(key_new3);
-mod(encrypted_img, 256);
+encrypted_img = mod(encrypted_img, 256);
+
+% flip image 180 (for fun)
+encrypted_img = imrotate(encrypted_img, 180);
 
 
 
@@ -79,13 +82,14 @@ encrypted_img = uint8(encrypted_img);
 figure;
 
 %%% SHOW ORIGINAL IMAGE
+
 subplot(3, 3, 2);   % middle spot of 1st row (3x3 grid)
 imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('ORIGINAL:');
 axis off;
 
 
-%%% SHOW KEY1 (straight across)
+%%% SHOW KEY1 clc(straight across)
 subplot(3, 3, 4);
 imshow(key_new1, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('KEY1');
