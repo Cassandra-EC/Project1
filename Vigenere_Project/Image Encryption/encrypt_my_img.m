@@ -13,7 +13,7 @@ function encrypted_img = encrypt_my_img(og_img, key)
 % version. The formula is as follows: og_img + (key_new1*key_new2) =
 % encrypted_img
 
-% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
+%%% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
 % accepted). Can also decrypt using the decrypt_my_img function
 
     %%% INPUTS:
