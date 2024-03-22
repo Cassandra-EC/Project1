@@ -18,8 +18,7 @@ function encrypted_img = encrypt_my_img(og_img, key)
 
     %%% INPUTS:
         % og_img = an original input image
-        % key = some text (ASCII non-alphabetical characters also accepted)
-        % used to encrypt the og_img
+        % key = text (ASCII characters) used to encrypt the og_img
     
     %%% OUTPUTS: 
         % encrypted_img = a new image made using both og_img and the key

@@ -1,19 +1,26 @@
 % created 3/15/24 CC. Last edited 3/15/24 CC
+% edited CC 3/22/24
 
 function shared_key = process_key(og_img, key)
-%%%CREATE SHARED FUNCTIONALITY THAT CAN BE USED BY KEY_TO_IMG 1 & 2
+    % PROCESS_KEY takes characters of key (in an abbreviated ASCII code) & 
+    % assigns each to a numeric value. These are then used to form an 
+    % array of the same size as the original img [the values of key_num 
+    % iterate through rows to do this]. First checks that size is appropriate/
+    % no clear errors.
+    % This output (shared_key) is used for both key_new1 & key_new2, which 
+    % are then multiplied & added to og_img to create the encrpted img
     
-    % SUMMARY: characters of key (in an abbreviated ASCII code) are assigned to numeric values.
-    % These are then used to form an array of the same size as original [the
-    % values of numeric_k iterate through rows to do this]. 
-    % First checks that size is appropriate/no clear errors
+    % SUMMARY: creates a matrix corresponding to characters of the key.
+    % These are repeated through rows to create a matrix the same size as 
+    % og_img. shared_key used to create both key_new1 & key_new2
 
+ 
     %%% INPUTS:
-        % key = text input by user
-        % og_img = original img input by user
+        % og_img = an original input image
+        % key = text (ASCII characters) used to encrypt the og_img
     
-    %%% OUTPUTS: array created from key, matching size of og_img
-
+    %%% OUTPUTS: 
+        % shared_key = array created from key, matching size of og_img
 
 
 %=== ACQUIRE CURRENT SIZE OF KEY AND OG_IMG
@@ -26,12 +33,11 @@ size_og = numel(og_img);
 key_num = double(key) - 32;
 
 
-%=== MAKE NUMERIC_K MATCH DIMENSIONS OF ORIGINAL IMAGE
+%=== MAKE KEY_NUM MATCH DIMENSIONS OF ORIGINAL IMAGE
 %if key is larger than image, confirm if user wants these inputs
 % IF KEY = SIZE OF OG_IMG, RESHAPE AND MOVE ON
 if length_k == size_og
    shared_key = key_num;
-
 
 % IF KEY < SIZE OF OG_IMG, REPEAT KEY TO MATCH SIZE
 elseif length_k < size_og
