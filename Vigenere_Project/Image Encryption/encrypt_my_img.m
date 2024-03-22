@@ -26,17 +26,23 @@ function encrypted_img = encrypt_my_img(og_img, key)
 
 %=== KEY PREPARATION ===%
 %%% CALL KEY_NEW1: img from 'key' numeric values repeating through rows
+key_new1 = key_to_img1(og_img, key);
+
+
+%%% CALL KEY_NEW2: img from 'key' numeric values spiraled from center
+key_new2 = key_to_img2(og_img, key);
+
 
 %%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
 key_new3 = key_to_img3(og_img, key);
 %key_new3 made to fit 0-256. not a necessity! just for display if desired
 mod(key_new3, 256);         
-disp(key_new3);
 
 
 %%% ENCRYPT IMAGE: new img from og_img + key_new3
-encrypted_img = double(og_img) .* double(key_new3);
+encrypted_img = double(og_img) + double(key_new3);
 mod(encrypted_img, 256);
+
 
 
 
@@ -64,6 +70,8 @@ key_new1 = uint8(key_new1);
 key_new2 = uint8(key_new2);
 key_new3 = uint8(key_new3);
 encrypted_img = uint8(encrypted_img);
+
+
 
 % first figure: all the info
 % CC:ERROR [already put but repeating here]: we need another figure w only
