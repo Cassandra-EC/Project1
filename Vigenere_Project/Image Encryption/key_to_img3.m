@@ -13,11 +13,17 @@ key_new1 = key_to_img1(og_img, key);
 key_new2 = key_to_img2(og_img, key);
 
 key_new3 = double(key_new1) .* double(key_new2);
+<<<<<<< Updated upstream
 key_new3 = mod(key_new3, 256);
 key_new3 = uint8(key_new3);  % wrap around values >255
+=======
+key_new3 = mod(key_new3, 256);      % wrap around values >255
+ 
+>>>>>>> Stashed changes
 
 
 % USE FOR DEBUGGING
+% key_new3 = uint8(key_new3); 
 % imshow(key_new3, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 % title('KEY3');
 % axis off;

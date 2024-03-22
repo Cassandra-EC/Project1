@@ -11,10 +11,16 @@ function return_og_img = decrypt_my_img(encrypted_img, key, og_img)
 key_new3 = key_to_img3(encrypted_img, key);
 
 
+<<<<<<< Updated upstream
 %=== RETURN OG_IMG
 return_og_img = encrypted_img - key_new3;
 return_og_img = mod(return_og_img, 256); % Wraparound if needed
 return_og_img = uint8(return_og_img);
+=======
+%%% key_new1
+key_new1 = key_to_img1(encrypted_img, key);
+key_new1 = uint8(key_new1);
+>>>>>>> Stashed changes
 
 % show og_img
 figure;
@@ -57,6 +63,7 @@ end
 % return_og_img = (return_xor_img);
 % return_og_img(not_zero_indices) = return_og_img(not_zero_indices) .* key_new2(not_zero_indices);
 % 
+<<<<<<< Updated upstream
 % 
 % %return_og_img = double(return_xor_img) .* (reciprocal_key_new2); %issue with 0 as divisor??
 % return_og_img = mod(return_og_img, 256); % Wraparound if needed
@@ -69,3 +76,17 @@ end
 % 
 % end
 % 
+=======
+
+%return_og_img = double(return_xor_img) .* (reciprocal_key_new2); %issue with 0 as divisor??
+return_og_img = mod(return_og_img, 256); % Wraparound if needed
+return_og_img = uint8(return_og_img);
+
+figure(4)
+imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+title('OG Image (return from encrypted)');
+axis off;
+
+end
+
+>>>>>>> Stashed changes

@@ -28,8 +28,30 @@ function encrypted_img = encrypt_my_img(og_img, key)
 %%% CALL KEY_NEW1: straightforward key
 key_new1 = key_to_img1(og_img, key);
 
+<<<<<<< Updated upstream
 %%% CALL KEY_NEW2: spiral key
 key_new2 = key_to_img2(og_img, key);
+=======
+% %=== confirm class of variables
+% % ensure og_img is uint8
+% og_img = uint8(og_img);
+% class(og_img);
+% class(key_new1);
+% class(xor_img);
+% class(key_new2);
+
+%=== ENCRYPT THE XOR TO GET FINAL ENCRYPTED IMG
+% xor_img + key_new2 = encrypted_img 
+
+%%% NEED TO CALL KEY TO IMG 1
+key_new1 = uint8(key_to_img1(og_img, key));
+
+% %%%NEED TO CALL CREATE XOR
+% xor_img = uint8(create_xor(og_img, key_new1));
+
+% Make key matrix (Call key_to_img2)
+key_new2 = uint8(key_to_img2(og_img, key));
+>>>>>>> Stashed changes
 
 
 %%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
