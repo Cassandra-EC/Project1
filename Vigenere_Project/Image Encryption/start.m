@@ -11,6 +11,9 @@ for also decryption or encryption
 
   encrypt --> dialog , upload and set it to 'image'
 
+%%%%  save og_img or img as variable
 
-
-  if 
+  if % Encrypt!
+         encrypted_img = encrypt_my_img(og_img, key);
+         disp('Encryption successful!');
+         break; % Exit loop
