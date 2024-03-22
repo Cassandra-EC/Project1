@@ -24,6 +24,7 @@ key_new2 = uint8(key_new2);
 %=== RETURN OG_IMG FROM XOR_IMG (in turn from encrypted img)
 % it is SO CLOSE, but there is definite variability
 
+
 %%% THIS IS SUPER FUCKED UP NOW. NEED TO FIX DECRYPTION IF WE OFFER IT
 % (& go through everything to debug. Make sure equations are all correct)
 %%% xor_img - key_new1 = og_img 
