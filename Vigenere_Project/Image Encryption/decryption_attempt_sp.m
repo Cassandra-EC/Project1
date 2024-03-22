@@ -6,15 +6,17 @@ function return_og_img = decryption_attempt_sp(encrypted_img, key)
 key_new1 = uint8(key_to_img1(encrypted_img, key));
 key_new2 = uint8(key_to_img2(encrypted_img, key));
 
-
 xor_img2 = double(encrypted_img) ./ double(key_new2);
 xor_img2 = mod(xor_img2, 256); % Wraparound values?
 % keep in range (test)
 xor_img2 = max(0, min(xor_img2, 255));
 
+key_new1_scaled = (double(key_new1) / 255) * max(xor_img2(:));
 
-return_og_img = xor_img2 - double(key_new1);
+return_og_img = abs(xor_img2 - double(key_new1_scaled));
+return_og_img = max(return_og_img, 0);
 return_og_img = mod(return_og_img, 256);
+
 
 % keep in range (test)
 return_og_img = max(0, min(return_og_img, 255))
