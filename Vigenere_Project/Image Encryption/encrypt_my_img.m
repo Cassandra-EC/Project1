@@ -6,14 +6,14 @@
 % edited 3/22 CC [NEW BRANCH CREATED, NEW IDEA]
 
 function encrypted_img = encrypt_my_img(og_img, key)
-% ENCRYPT_MY_IMG 'encrypts' a submitted image according to a submitted key
+%%% ENCRYPT_MY_IMG 'encrypts' a submitted image according to a submitted key
 % word/words in ASCII format. 
 % The key is converted into two matrices the same size as og_img (i.e. also
 % images!) that are used to manipulate the original image into an encrypted
 % version. The formula is as follows: og_img + (key_new1*key_new2) =
 % encrypted_img
 
-% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
+%%% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
 % accepted). Can also decrypt using the decrypt_my_img function
 
     %%% INPUTS:
