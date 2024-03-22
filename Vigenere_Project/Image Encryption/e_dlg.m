@@ -1,7 +1,7 @@
 % created 3/18 CC
 % Edited 03/20 SP-- functional and returns encrypted image upon completion
 % of dialogue boxes, etc
-% debugging 3/22 CC. ERRORS/Qs BEGIN W '%CC:ERROR'
+% debugging 3/22 CC. Renamed to 'e_dlg' for now. ERRORS/Qs BEGIN W '%CC:ERROR'
 
 %answer = inputdlg(prompt,dlgtitle,fieldsize,definput,opts)specifies that the 
 % dialog box is resizeable in the horizontal direction when opts is set to 
@@ -12,7 +12,7 @@
 
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
-function encrypted_img = image_dialogue()
+function encrypted_img = e_dlg()
     %%% consi
 
 %=== ASK USER FOR IMAGE SUBMISSION; 3 OPTIONS (file, url, code own matrix)
@@ -92,6 +92,7 @@ while true      % option window appears & remains until one is chosen
         
          % If img not set to og_img, error message
          if exist('og_img', 'var') == 0
+             print('og_img');
              error("NO IMAGE ARRAY SUBMITTED. PLEASE MAKE SURE TO ASSIGN YOUR IMAGE YOUR IMAGE TO THE VARIABLE NAME 'og_img'");
             
              %CC:ERROR 
@@ -147,9 +148,13 @@ end
 
 %=== DISPLAY USER'S IMAGE FOR CONFIRMATION
 % show image
-imshow(og_img);
-title('Your Image');
+imshow(og_img, 'InitialMagnification', 'fit');
+title('IMAGE SELECTED');
 axis off;
+
+% CC:ERROR   IMAGE SHOULD GO AWAY AFTER BEING CONFIRMED! 
+% As well as after being rejected. otherwise clogs up w repetition & gets
+% confusing once encryption appears. Should be quick
 
 
 
