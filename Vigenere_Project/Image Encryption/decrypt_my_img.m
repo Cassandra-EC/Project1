@@ -1,7 +1,7 @@
 % created 3/15/24 CC. Edited 3/17/24 SN. Edited 3/18 CC
 % edited 3/22 CC. 
 
-function return_og_img = decrypt_my_img(encrypted_img, key, og_img)
+function return_og_img = decrypt_my_img(encrypted_img, key)
 %%% Returns original image from return_xor_image and key. Final step in
 %%% decryption
 %%%% CC:ERROR ADD SUMMARY ADD INPUTS ADD OUTPUTS
@@ -18,17 +18,19 @@ return_og_img = encrypted_img - key_new3;
 return_og_img = mod(return_og_img, 256); % Wraparound if needed
 return_og_img = uint8(return_og_img);
 
-% show og_img
+
+% show (decrypted) og_img 
 figure;
 subplot(1,2,1);
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('OG Image (returned from encrypted img)');
 axis off;
 
-
+%%% FOR DEBUGGING USE TEST_IMG and show original
 subplot(1,2,2);
-imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('actual og');
+test_img = test();
+imshow(test_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+title('actual og (test!!)');
 axis off;
 
 end
