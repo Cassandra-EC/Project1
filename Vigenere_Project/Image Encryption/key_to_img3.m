@@ -1,6 +1,4 @@
-% created 3/15/24 CC. Edited 3/16/24 CC
-% Last edited 3/16/24 SP
-% NEW BRANCH: changed from create_xor to key_new3
+% created 3/22 CC
 
 function key_new3 = key_to_img3(og_img, key)
 %%% FIX THIS PART
