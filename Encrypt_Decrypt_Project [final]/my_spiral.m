@@ -1,6 +1,6 @@
 % created 3/15/24 CC (referencing Matlab's 'spiral' function)
 % Edited 3/15/24 CC [still working on it]
-% Last edited 03/17/24 SP [WORKS FOR key_col input, done for grayscale]
+% FINISHED 03/17/24 SP
 
 function spiral = my_spiral(rows, cols, input)
 % MY_SPIRAL generates spiral_indices for a matrix of size rows x cols

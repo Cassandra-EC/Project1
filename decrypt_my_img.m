@@ -4,7 +4,6 @@
 function return_og_img = decrypt_my_img(encrypted_img, key)
 %%% Returns original image from return_xor_image and key. Final step in
 %%% decryption
-%%%% CC:ERROR ADD SUMMARY ADD INPUTS ADD OUTPUTS
 
 %%% DECRYPT_MY_IMG 'decrypts' a submitted image according to a submitted key
 % word/words in ASCII format. Attempts to restore the og_img initially
