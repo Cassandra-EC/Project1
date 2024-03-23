@@ -13,7 +13,7 @@ function img_input = dialog_input()
         try
             % 3 upload options, if user hits return, defaults to upload from file
             image_preference = questdlg('How would you like to upload your image?', 'Image Upload', options{1}, options{2}, options{3}, options{1});
-
+            assignin('base', 'image_preference', image_preference);
 
             %=== FILE UPLOAD DIALOGUE 
             if strcmp(image_preference, options{1})
@@ -29,7 +29,9 @@ function img_input = dialog_input()
 
                 % Load/read image to prepare for next steps. Then break
                 img_path = fullfile(file_path, file_name);
+                assignin('base', 'img_path', img_path);
                 img = imread(img_path);
+                assignin('base', 'img', img);
                 break; % Exit loop
 
 
@@ -49,6 +51,8 @@ function img_input = dialog_input()
                 try
                     % Attempt to read image from URL
                     img = webread(img_url);
+                    assignin('base', 'img', img);
+
                     break; % Exit loop
                 catch
                     error('Failed to read your image from provided URL.');
@@ -64,6 +68,7 @@ function img_input = dialog_input()
 
                 % Wait for user to click
                 uiwait(msgbox("Create your image 'img'. Click OK when done!", 'Create img'));
+                assignin('base', 'img', img);
 
                 % If img not set to og_img, error message
                 if exist('img', 'var') == 0
@@ -80,11 +85,25 @@ function img_input = dialog_input()
                 error('Invalid option selected.');
             end
             
-            %%% SIZE CHECK, once img loaded
-            if img_size > size_lim
-                disp('Image size exceeds the maximum allowed size.');
-                disp('Please select a different image.');
-                continue; % Restart the loop to select another image
+            % Size check loop
+            while true
+                [img_size, size_lim] = size_check(img, image_preference, img_path)
+    
+                %%% SIZE CHECK, once img loaded
+                if img_size > size_lim
+                    disp('Image size exceeds the maximum allowed size.');
+                    disp('Please select a different image.');
+                    % Reupload image
+                    break;
+                else
+                    % if selected image is right size, break loop
+                    break;
+                end
+            end
+
+            if img_size <= size_lim
+                % Exit upload loop
+                break;
             end
 
         catch
