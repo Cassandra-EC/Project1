@@ -1,11 +1,10 @@
 % created 3/18/24 SN. Edited 3/18 CC
 
 function img_path = upload_file()
-%=== SUMMARY: creates a path to a jpg, jpeg, or png file that can be used
-%as og_img.
-
-
-% 
+%=== SUMMARY: creates & stores the name of path to a jpg, jpeg, or png file 
+% selected by the user. This selection occurs in 'dialog_input', if user chooses
+% to upload a file from their computer. Image then later stored/used as
+% 'og_img' during encryption
 
 % stores name of file & path; opens finder window & creates a dialog box 
 [FileName, PathName] = uigetfile({'*.png;*.jpeg;*.jpg','Select the image you want to encrypt.'});
