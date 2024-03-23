@@ -1,6 +1,7 @@
 % created 3/18 CC
 % Edited 03/20 SP-- functional and returns encrypted image upon completion
 % of dialogue boxes, etc
+% edited 3/22 SP
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 function img_input = dialog_input()
@@ -87,7 +88,7 @@ function img_input = dialog_input()
             
             % Size check loop
             while true
-                [img_size, size_lim] = size_check(img, image_preference, img_path)
+                [img_size, size_lim] = size_check(img, image_preference, img_path);
     
                 %%% SIZE CHECK, once img loaded
                 if img_size > size_lim

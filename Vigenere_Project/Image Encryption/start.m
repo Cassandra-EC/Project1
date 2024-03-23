@@ -1,10 +1,11 @@
 %%%%%% our beginnning script for people to call
 
 %%%%%%%
+og_img = dialog_input;
 
 shift some things out of image dialoge to make it broader 
 for also decryption or encryption
-
+IF STATEMENT
 
   %%%n info
   choose encrypt or decrypt
