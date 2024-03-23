@@ -1,7 +1,4 @@
-% created 3/18 CC
-% Edited 03/20 SP-- functional and returns encrypted image upon completion
-% of dialogue boxes, etc
-% edited 3/22 SP
+
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 function [img_input, key] = dialog_input()
@@ -117,6 +114,12 @@ while true
              % Check for key
              if isempty(key_cell)
                  disp('No key provided.');
+                 cancel_key = questdlg('Do you want to cancel the image selection?', 'Cancel Image?', 'Yes', 'No', 'Yes');
+                 if strcmp(cancel_key, 'Yes')
+                     img = [];
+                     close(1);
+                     return;
+                 end
              else 
                  % Extract key (key cannot be used when cell array)
                  key = key_cell{1};
@@ -130,6 +133,7 @@ while true
     elseif strcmp(confirm_use, 'Cancel')
          disp('Image canceled.');
          img = [];
+         close(1);
          % Restart image dialog
          img = dialog_input();
          if isempty(img)
@@ -139,6 +143,7 @@ while true
      else 
          disp('Unexpected error. Image canceled.');
          img = [];
+         close(1);
          % Restart image dialog
          img = dialog_input();
          if isempty(img)
