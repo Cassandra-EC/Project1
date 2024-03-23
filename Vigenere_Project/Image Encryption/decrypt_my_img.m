@@ -36,23 +36,9 @@ return_og_img = mod(return_og_img, 256); % Wraparound if needed
 
 
 figure;
-%%% FOR DEBUGGING USE ONLY
-subplot(1,3,2);
-imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('encrypted img)');
-axis off;
-
 % show (decrypted) og_img 
-subplot(1,3,2);
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('OG Image (returned from encrypted img)');
-axis off;
-
-%%% FOR DEBUGGING USE TEST_IMG and show original
-subplot(1,3,3);
-test_img = test();
-imshow(test_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('actual og (test!!)');
 axis off;
 
 end
