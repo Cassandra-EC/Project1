@@ -1,6 +1,5 @@
-%%%%%% our beginnning script for people to call
+%%%% 
 
-%%%%%%%
 function start()
 
 choose = questdlg("What would you like to do?", 'Encryption or Decryption', 'Encrypt', 'Decrypt', 'Cancel', 'Encrypt');
