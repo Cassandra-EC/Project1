@@ -75,14 +75,10 @@ key_new3 = uint8(key_new3);
 encrypted_img = uint8(encrypted_img);
 
 
-
-% first figure: all the info
-% CC:ERROR [already put but repeating here]: we need another figure w only
-% the encrypted_img
-figure;
+%==== FIGURE 1: ALL STATES OF IMAGE AND KEY
+full_figure = figure('Name', 'THE PROCESS OF ENCRYPTION');
 
 %%% SHOW ORIGINAL IMAGE
-
 subplot(3, 3, 2);   % middle spot of 1st row (3x3 grid)
 imshow(og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('ORIGINAL:');
@@ -112,8 +108,50 @@ subplot(3, 3, 8);     % middle spot of last row (3x3 grid)
 imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
 title('ENCRYPTED');
 axis off;
+set(gcf, 'Units', 'pixels'); % Set figure units to pixels
+%=== END OF FIG. 1
 
-% ADD ANOTHER FIGURE HERE !!!!
 
+
+
+%==== FIGURE 2: ENCRYPTED IMAGE ONLY
+
+% call entire figure
+figure('Name', 'YOUR ENCRYPTED OUTPUT');
+imshow(encrypted_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
+% remove borders, store as pixels
+axis off;
+set(gcf, 'Units', 'pixels'); % Set figure units to pixels
+
+
+%=== ASK USER IF THEY WOULD LIKE TO SAVE THE IMG (default is yes)
+save_img = questdlg('Would you like to save your encryption as a jpeg?', ...
+                  'Save Image', ...
+                  'Yes', 'No', 'Yes');
+
+% Process user's choice
+switch save_img
+    case 'Yes'
+        % Prompt user to select a file path
+        [filename, pathname] = uiputfile({'*.jpg','JPEG Image (*.jpg)';...
+                                           '*.png','PNG Image (*.png)'}, ...
+                                           'Save Image As', key);
+        if filename ~= 0  % User selected a file
+            % Construct full file path
+            full_path = fullfile(pathname, filename);
+            
+            % Save the image
+            imwrite(encrypted_img, full_path);
+            disp(['Image saved as: ', full_path]);
+        else
+            disp('Image not saved.');
+        end
+    case 'No'
+        disp('Image not saved.');
+end
 
 end
+
+
+
+
