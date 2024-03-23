@@ -3,7 +3,7 @@
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 % edited 3/18/24 CC SP
-% edited 3/22 CC [NEW BRANCH CREATED, NEW IDEA]
+% edited 3/22 CC 
 
 function encrypted_img = encrypt_my_img(og_img, key)
 %%% ENCRYPT_MY_IMG 'encrypts' a submitted image according to a submitted key
@@ -50,24 +50,11 @@ encrypted_img = imrotate(encrypted_img, 180);
 
 
 %=== DISPLAY ORIGINAL & ENCRYPTED IMAGES ===%
-%CC:ERROR I think goal should be (if possible) to open 2 windows: 
-% window1: shows  user every stage of their img (og, key1, key2, key3, and
-% encrypted). This should have VERY CLEAR LABELS, including window titled
-% 'for your benefit' or smth.
-
-% window2: shows encrypted_img ALONE. NO TITLE. NOTHING ELSE. This is so
-% that they can download & send to friend. One HAS to be able to download &
-% upload this img. And then decrypt it and have og_img return. Good to test
-% decryption with the stored variable, but REAL USERS wouldn't have
-% encrypted_img stored!! Computer needs to be able to handle it. 
-    % The window can be titled 'download and send your encrypted img' or smth
-% like that. But in the BAR, not as a 'title' within the window. In a spot
-% where it won't be seen upon decryption
+% displays both 1) the process, for the user to see, & 2) the pure output
+% also allows user to automatically save as a jpg, titled as the key
 
 
-% Restore all images to uint8
-% CC:ERROR  Try with/without this part. May not be necessary but keeping it
-% for now.
+% Restore all images to uint8 for safety
 og_img = uint8(og_img);
 key_new1 = uint8(key_new1);
 key_new2 = uint8(key_new2);

@@ -1,6 +1,7 @@
 % created 3/18 CC
 % Edited 03/20 SP-- functional and returns encrypted image upon completion
 % of dialogue boxes, etc
+% edited 3/22 SP
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 function img_input = dialog_input()
@@ -74,6 +75,31 @@ function img_input = dialog_input()
             else
                 error('Invalid option selected.');
             end
+<<<<<<< HEAD
+=======
+            
+            % Size check loop
+            while true
+                [img_size, size_lim] = size_check(img, image_preference, img_path);
+    
+                %%% SIZE CHECK, once img loaded
+                if img_size > size_lim
+                    disp('Image size exceeds the maximum allowed size.');
+                    disp('Please select a different image.');
+                    % Reupload image
+                    break;
+                else
+                    % if selected image is right size, break loop
+                    break;
+                end
+            end
+
+            if img_size <= size_lim
+                % Exit upload loop
+                break;
+            end
+
+>>>>>>> 695f0408ecf0f3e7d845b3006b5e56a5d020f2ac
         catch
             disp('An error occurred! Please try again.');
         end
