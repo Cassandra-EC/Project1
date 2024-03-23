@@ -4,7 +4,7 @@
 % edited 3/22 SP
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
-function img_input = dialog_input()
+function [img_input, key] = dialog_input()
 
     %=== ASK USER FOR IMAGE SUBMISSION; 3 OPTIONS (file, url, code own matrix)
 
