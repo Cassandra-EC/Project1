@@ -3,7 +3,7 @@
 %%% doing what we want it to, though. But spiral is generated, XOR img is
 %%% too.
 % edited 3/18/24 CC SP
-% edited 3/22 CC 
+% edited 3/22 CC SP
 
 function encrypted_img = encrypt_my_img(og_img, key)
 %%% ENCRYPT_MY_IMG 'encrypts' a submitted image according to a submitted key

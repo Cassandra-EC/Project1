@@ -25,19 +25,4 @@ else
     og_img = imread(im_path);
 end
    
-
-
-
-
-
-%%%ADD IF STATEMENT (here or in encrypted_img?) <-- almost def in encrypted
-%%%img. Only call this function if the user actually inputs a file path
-
-% goal: 1) if user chooses to upload an image, use this function [upload & use
-% as og_img. 2) if user chooses to create own matrix directly, use that. 3)
-% if user chooses to upload a link, use that
-%%% for all of these inputs, if it exceeds a certain size [may need to test
-%%% possible sizes] will be returned [saying og_img must be < __ x __
-%%% pixels]
-
 end

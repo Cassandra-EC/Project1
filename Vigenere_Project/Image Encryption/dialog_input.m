@@ -1,10 +1,24 @@
+%% Created 03/21 SP, edited and finalized 03/22 SP
 
 
 % === INSTRUCTIONS TO USER FOR HOW TO USE FUNCTION
 function [img_input, key] = dialog_input()
 
-    %=== ASK USER FOR IMAGE SUBMISSION; 3 OPTIONS (file, url, code own matrix)
+%%% DIALOG INPUT runs through a dialogue tree, guiding a user through
+%%% uploading an image (either as file, URL, or array). It then displays the image
+% and has the user confirm for correct selection.
+% Afterwards, it prompts the user to input a key. It loops and breaks,
+% depending on where one is and the error-- ie, if you do not input a key
+% when prompted, it then asks if you want to cancel image selection.
 
+%%% SUMMARY: Guide's user through uploading image and key.
+    
+    %%% OUTPUTS: 
+        % img_input = User-uploaded image, read and assigned to img_input
+        % key = User input of a key, formated as a numeric array
+
+
+    %=== ASK USER FOR IMAGE SUBMISSION; 3 OPTIONS (file, url, code own matrix)
     while true
         options = {'Upload image from file', 'Provide image URL', 'Create image array'};
         
@@ -58,7 +72,7 @@ function [img_input, key] = dialog_input()
                 end
 
 
-            % if user selects array upload option
+            % === ARRAY UPLOAD DIALOGUE
             elseif strcmp(image_preference, options{3})
                 disp("A fellow coder! You've chosen to create an array to use as your image.");
                 disp("Please create your image array when prompted in the dialog box.");
@@ -86,26 +100,32 @@ function [img_input, key] = dialog_input()
             else
                 error('Invalid option selected.');
             end
-              
+         
+        %%% === Case for other unspecified errors    
         catch
             disp('An error occurred! Please try again.');
         end
     end
     
-
-% show image
+% Display image for user confirmation
 figure(1);
 imshow(img, 'InitialMagnification', 'fit');
 title('IMAGE SELECTED');
 axis off;
-           
+
+
+% === CONFIRM IMAGE and REQUEST KEY
 while true
+    % Confirm if user wants to use this image
     confirm_use = questdlg('Is this the image you would like to use?', 'Confirm Image', 'Use this!', 'Cancel', 'Use this!');
  
-     % Check user's response
+     % === CHECK USER RESPONSE
+     % User choice: Use
      if strcmp(confirm_use, 'Use this!')
          % Close image
-         close(1);
+         if ishandle(1)
+            close(1);
+         end
 
          while true
             % Ask user for key input
@@ -114,12 +134,15 @@ while true
              % Check for key
              if isempty(key_cell)
                  disp('No key provided.');
+                 % If no key or dialog box canceled, check if user wishes
+                 % to proceed with image selection
                  cancel_key = questdlg('Do you want to cancel the image selection?', 'Cancel Image?', 'Yes', 'No', 'Yes');
                  if strcmp(cancel_key, 'Yes')
                      img = [];
-                     close(1);
+                     disp('Image canceled.');
                      return;
                  end
+                 
              else 
                  % Extract key (key cannot be used when cell array)
                  key = key_cell{1};
@@ -130,29 +153,35 @@ while true
          end
          break; % Exit image confirmation loop
  
+    % User choice: Cancel
     elseif strcmp(confirm_use, 'Cancel')
          disp('Image canceled.');
          img = [];
-         close(1);
+         if ishandle(1)
+            close(1);
+         end
          % Restart image dialog
-         img = dialog_input();
+         img_input = dialog_input();
          if isempty(img)
-             break; % Exit loop if user cancels
+            return;
          end
 
      else 
          disp('Unexpected error. Image canceled.');
          img = [];
-         close(1);
+         if ishandle(1)
+            close(1);
+         end
          % Restart image dialog
-         img = dialog_input();
+         img_input = dialog_input();
          if isempty(img)
-             break; % Exit loop if user cancels
+             return; % Exit loop if user cancels
          end
      end
  
 end
 
+% === ASSIGN IMG TO IMG_INPUT
 img_input = img;
 
 end
