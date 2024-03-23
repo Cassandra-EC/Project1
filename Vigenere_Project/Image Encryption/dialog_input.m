@@ -13,13 +13,12 @@ function img_input = dialog_input()
         try
             % 3 upload options, if user hits return, defaults to upload from file
             image_preference = questdlg('How would you like to upload your image?', 'Image Upload', options{1}, options{2}, options{3}, options{1});
-            assignin('base', 'image_preference', image_preference);
 
             %=== FILE UPLOAD DIALOGUE 
             if strcmp(image_preference, options{1})
                 disp("Excellent. You've chosen to upload an image file from your device.")
 
-                % Selected file saved with path & name
+                % Selected file saved with path & name 
                 [file_name, file_path] = uigetfile({'*.jpg; *.jpeg; *.png', 'Image Files'}, 'Select Image File');
 
                 % ERROR if 'cancel' hit (no image selected)
@@ -29,9 +28,7 @@ function img_input = dialog_input()
 
                 % Load/read image to prepare for next steps. Then break
                 img_path = fullfile(file_path, file_name);
-                assignin('base', 'img_path', img_path);
                 img = imread(img_path);
-                assignin('base', 'img', img);
                 break; % Exit loop
 
 
@@ -51,8 +48,6 @@ function img_input = dialog_input()
                 try
                     % Attempt to read image from URL
                     img = webread(img_url);
-                    assignin('base', 'img', img);
-
                     break; % Exit loop
                 catch
                     error('Failed to read your image from provided URL.');
@@ -68,44 +63,17 @@ function img_input = dialog_input()
 
                 % Wait for user to click
                 uiwait(msgbox("Create your image 'img'. Click OK when done!", 'Create img'));
-                assignin('base', 'img', img);
 
                 % If img not set to og_img, error message
                 if exist('img', 'var') == 0
                     print('img');
                     error("NO IMAGE ARRAY SUBMITTED. PLEASE MAKE SURE TO ASSIGN YOUR IMAGE YOUR IMAGE TO THE VARIABLE NAME 'img'");
-
-                    %CC:ERROR 
-                    %%% ADD LOOP/SEND BACK TO SUBMISSION POSSIBILITY!! %%%
-
                 end
 
             % ERROR IF USER TAKES ANOTHER ACTION (somehow)
             else
                 error('Invalid option selected.');
             end
-            
-            % Size check loop
-            while true
-                [img_size, size_lim] = size_check(img, image_preference, img_path)
-    
-                %%% SIZE CHECK, once img loaded
-                if img_size > size_lim
-                    disp('Image size exceeds the maximum allowed size.');
-                    disp('Please select a different image.');
-                    % Reupload image
-                    break;
-                else
-                    % if selected image is right size, break loop
-                    break;
-                end
-            end
-
-            if img_size <= size_lim
-                % Exit upload loop
-                break;
-            end
-
         catch
             disp('An error occurred! Please try again.');
         end
@@ -119,35 +87,48 @@ title('IMAGE SELECTED');
 axis off;
            
 while true
-confirm_use = questdlg('Is this the image you would like to use?', 'Confirm Image', 'Use this!', 'Cancel', 'Use this!');
+    confirm_use = questdlg('Is this the image you would like to use?', 'Confirm Image', 'Use this!', 'Cancel', 'Use this!');
  
      % Check user's response
      if strcmp(confirm_use, 'Use this!')
          % Close image
          close(1);
-         % Ask user for key input
-         key_cell = inputdlg('Enter key! Be creative! The longer and cooler your key, the stronger the encryption B)', 'Key Input', [1, 50]);
+
+         while true
+            % Ask user for key input
+            key_cell = inputdlg('Enter key! Be creative! The longer and cooler your key, the stronger the encryption B)', 'Key Input', [1, 50]);
  
  
-         % Check for key
-         if isempty(key_cell)
-             error('No key provided.');
+             % Check for key
+             if isempty(key_cell)
+                 error('No key provided.');
+             else 
+                 % Extract key (key cannot be used when cell array)
+                 key = key_cell{1};
+                 % Save key as variable in Workspace
+                 assignin('base', 'key', key);
+                 break; % Exit key input loop
+             end
          end
+         break; % Exit image confirmation loop
  
-         % Extract key (key cannot be used when cell array)
-         key = key_cell{1};
-         % Save key as variable in Workspace
-         assignin('base', 'key', key);
-         break; % Exit loop
- 
-     elseif strcmp(confirm_use, 'Cancel')
+    elseif strcmp(confirm_use, 'Cancel')
          disp('Image canceled.');
          img = [];
-         break; % Exit loop
+         % Restart image dialog
+         img = dialog_input();
+         if isempty(img)
+             break; % Exit loop if user cancels
+         end
+
      else 
          disp('Unexpected error. Image canceled.');
          img = [];
-         break; % Exit loop
+         % Restart image dialog
+         img = dialog_input();
+         if isempty(img)
+             break; % Exit loop if user cancels
+         end
      end
  
 end
