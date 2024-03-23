@@ -38,7 +38,7 @@ return_og_img = mod(return_og_img, 256); % Wraparound if needed
 figure;
 % show (decrypted) og_img 
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('OG Image (returned from encrypted img)');
+title('Decrypted Image! [pls know that this is subject to..noise :(');
 axis off;
 
 end
