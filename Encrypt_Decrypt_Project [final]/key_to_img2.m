@@ -4,8 +4,6 @@
 
 
 function key_new2 = key_to_img2(og_img, key)
-    %%%% CC:ERROR FIX SUMMARY ADD INPUTS ADD OUTPUTS
-
     % SUMMARY: characters of key are used to form an array of same size as
     % og_img (like in key_to_img1. This array will be used to encrypt
     % (doubly!) xor_img and give us our final encrypted output.

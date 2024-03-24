@@ -10,7 +10,7 @@ function encrypted_img = encrypt_my_img(og_img, key)
 % word/words in ASCII format. 
 % The key is converted into two matrices the same size as og_img (i.e. also
 % images!) that are used to manipulate the original image into an encrypted
-% version. The formula is as follows: og_img + (key_new1*key_new2) =
+% version. The formula is as follows: og_img + ((key_new1+88)*key_new2) =
 % encrypted_img
 
 %%% SUMMARY: encrypt a submitted image using a 'key' input (ASCII characters
@@ -35,6 +35,7 @@ key_new2 = key_to_img2(og_img, key);
 
 %%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
 key_new3 = key_to_img3(og_img, key);
+pixel_inconsistencies(key_new3);
 %key_new3 made to fit 0-256. not a necessity! just for display if desired
 mod(key_new3, 256);         
 
@@ -67,9 +68,12 @@ key_new2 = uint8(key_new2);
 key_new3 = uint8(key_new3);
 encrypted_img = uint8(encrypted_img);
 
+% FOR DEBUGGING KEY 3
+pixel_inconsistencies(key_new3);
+
 
 %==== FIGURE 1: ALL STATES OF IMAGE AND KEY
-full_figure = figure('Name', 'THE PROCESS OF ENCRYPTION');
+figure('Name', 'THE PROCESS OF ENCRYPTION');
 
 %%% SHOW ORIGINAL IMAGE
 subplot(3, 3, 2);   % middle spot of 1st row (3x3 grid)

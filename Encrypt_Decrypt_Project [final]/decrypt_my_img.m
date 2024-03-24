@@ -38,9 +38,9 @@ key_new3 = key_to_img3(encrypted_img, key);
 
 
 %=== RETURN OG_IMG
-return_og_img = encrypted_img - key_new3;
+return_og_img = double(encrypted_img) - double(key_new3);
 return_og_img = mod(return_og_img, 256); % Wraparound if needed
-%return_og_img = uint8(return_og_img);
+return_og_img = uint8(return_og_img);
 
 
 figure;

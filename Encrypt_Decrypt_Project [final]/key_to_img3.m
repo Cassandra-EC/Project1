@@ -23,10 +23,22 @@ key_new1 = key_to_img1(og_img, key);
 key_new2 = key_to_img2(og_img, key);
 
 %%% CREATE KEY_NEW3 from KEY_NEW1 and KEY_NEW2
+% debug statements DELETE LATER
+disp(size(key_new1));
+disp(size(key_new2));
+
 key_new3 = (88 + double(key_new1)) .* double(key_new2); 
 % [adding 88 is just an homage to one of our star coders.]
+
 key_new3 = mod(key_new3, 256);      % wrap around values >255
+% debug statements DELETE LATER
+disp(min(key_new3(:)));
+disp(max(key_new3(:)));
+
 key_new3 = uint8(key_new3);  
+% debug statements DELETE LATER
+disp(min(key_new3(:)));
+disp(max(key_new3(:)));
 
 end
 
