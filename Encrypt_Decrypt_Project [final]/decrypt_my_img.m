@@ -46,7 +46,7 @@ return_og_img = uint8(return_og_img);
 figure;
 % show (decrypted) og_img 
 imshow(return_og_img, 'DisplayRange', [0,255], 'InitialMagnification', 'fit');
-title('Decrypted Image! [pls know that this is subject to..noise :(');
+title('Decrypted Image! [pls know that this is subject to noise!]');
 axis off;
 
 end

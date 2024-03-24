@@ -35,7 +35,8 @@ key_new2 = key_to_img2(og_img, key);
 
 %%% CALL KEY_NEW3: img from key_new1 x key_new2 (element-wise)
 key_new3 = key_to_img3(og_img, key);
-pixel_inconsistencies(key_new3);
+
+
 %key_new3 made to fit 0-256. not a necessity! just for display if desired
 mod(key_new3, 256);         
 
@@ -67,9 +68,6 @@ key_new1 = uint8(key_new1);
 key_new2 = uint8(key_new2);
 key_new3 = uint8(key_new3);
 encrypted_img = uint8(encrypted_img);
-
-% FOR DEBUGGING KEY 3
-pixel_inconsistencies(key_new3);
 
 
 %==== FIGURE 1: ALL STATES OF IMAGE AND KEY
