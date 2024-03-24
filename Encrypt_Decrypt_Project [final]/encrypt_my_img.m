@@ -50,10 +50,8 @@ half_w = floor(width(encrypted_img)/2);
 half_h = floor(height(encrypted_img)/2);
 encrypted_img = circshift(encrypted_img, [half_w, half_h]); 
 
-% keep from 0 to 255
-encrypted_img = double(og_img) + double(key_new3);
-encrypted_img = mod(encrypted_img, 256);
-
+% rotate 180 degrees (just for an extra layer!)
+encrypted_img = imrotate(encrypted_img, 180);
 
 
 
