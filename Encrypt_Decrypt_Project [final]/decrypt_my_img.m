@@ -22,8 +22,13 @@ function return_og_img = decrypt_my_img(encrypted_img, key)
 
 
 
-%=== 'UNROTATE' encrypted_img (was rotated 180 before)
-encrypted_img = imrotate(encrypted_img, 180);
+%=== 'UNSCRAMBLE' encrypted_img (created separate quadrants before)
+% shift each half of image, for more pronounced encryption [creates
+% quadrants]
+half_w = floor(width(encrypted_img)/2);
+half_h = floor(height(encrypted_img)/2);
+encrypted_img = circshift(encrypted_img, [-half_w, -half_h]); 
+
 
 %=== LOAD KEY3, using encrypted_img as size reference
 key_new3 = key_to_img3(encrypted_img, key);
