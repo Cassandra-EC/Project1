@@ -1,5 +1,5 @@
-% created 3/15/24 CC. Last edited 3/15/24 CC
-% edited CC 3/22/24
+% created 3/15/24 CC. Edited 3/15/24 CC
+% edited CC 3/22/24. Last edited CC 3/23/24
 
 function shared_key = process_key(og_img, key)
     % PROCESS_KEY takes characters of key (in an abbreviated ASCII code) & 
@@ -25,7 +25,9 @@ function shared_key = process_key(og_img, key)
 
 %=== ACQUIRE CURRENT SIZE OF KEY AND OG_IMG
 length_k = length(key);
-size_og = numel(og_img);
+size_og = size(og_img);
+num_layers = size_og(3);
+size_og_layer = prod(size_og(1:2)); % # elements in each layer of og_img
 
 
 %=== CREATE NUMERIC KEY
@@ -36,18 +38,18 @@ key_num = double(key) - 32;
 %=== MAKE KEY_NUM MATCH DIMENSIONS OF ORIGINAL IMAGE
 %if key is larger than image, confirm if user wants these inputs
 % IF KEY = SIZE OF OG_IMG, RESHAPE AND MOVE ON
-if length_k == size_og
+if length_k == size_og_layer
    shared_key = key_num;
 
 % IF KEY < SIZE OF OG_IMG, REPEAT KEY TO MATCH SIZE
-elseif length_k < size_og
-
-    % update key_num to repeat until it's the size of og_img (call
+elseif length_k < size_og_layer
+    % update key_num to repeat until it's the size of 1 og_img layer (call
     % remaining indices). May be longer (will trim)
-    key_num = repmat(key_num, 1, ceil(size_og/length_k));
+    key_num = repmat(key_num, 1, ceil(size_og_layer/length_k));
     
-    % trim key_num to perfectly fit size_og
-    shared_key = key_num(1:size_og);
+    % trim key_num to PERFECTLY fit size of 1 og_img layer
+    shared_key = key_num(1:size_og_layer);
+
 
 
 % IF KEY > SIZE_OG, ASK USER IF WHETHER TO 1) TRIM OR 2) USE NEW INPUTS
@@ -65,6 +67,12 @@ else
         disp('Returning original key. Please submit new inputs.');
         return;
     end
+end
+
+
+%=== TRIPLICATE SHARED_KEY LAYERS IF NECESSARY
+if num_layers >1
+    shared_key = repmat(shared_key, [1, 1, 3]);
 end
 
 
