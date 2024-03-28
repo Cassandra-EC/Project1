@@ -11,8 +11,8 @@ Function creates scrambled, 'encrypted' image from two user inputs: a 'key' [ASC
 An additional 'decrypt' function allows a separate user without the og_img to input the encrypted_img and key, in order to receive a (modified and still somewhat scrambled!!) version of the original image.
 
 FUNCTIONALITY: 
-  WRITE 'start' IN THE COMMAND WINDOW
-  CHOOSE WHETHER TO ENCRYPT OR DECRYPT
+  WRITE 'start' IN THE COMMAND WINDOW;
+  CHOOSE WHETHER TO ENCRYPT OR DECRYPT;
   FOLLOW THE DIALOGUE CUES TO UPLOAD AN IMAGE (url, file upload, create a matrix) AND A KEY (accepts ASCII characters 32-127)
 
 **Longer/more intricate keys will generate more intricate encryptions! (and be difficult to decrypt :D )
